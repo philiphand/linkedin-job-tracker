@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Linkedin Job Tracker
         </a>
       </header>
     </div>
