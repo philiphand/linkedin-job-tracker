@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+import { Header } from "./Components/Header";
 
-function App() {
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Linkedin Job Tracker
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Content>
+        <h2>Top 10 skills</h2>
+      </Content>
     </div>
   );
 }
 
-export default App;
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
