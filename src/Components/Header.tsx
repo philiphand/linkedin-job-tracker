@@ -6,6 +6,10 @@ export const Header: React.FC = () => {
     return (
         <Wrapper>
             <Title>Most in-demand tech skills</Title>
+            <MenuButton>Trending</MenuButton>
+            <MenuButton>Top 10</MenuButton>
+            <MenuButton>All</MenuButton>
+            <MenuButton>History</MenuButton>
         </Wrapper>
     );
 }
@@ -15,10 +19,26 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 `
 
 const Title = styled.h2`
     position: absolute;
-    padding-left: 50px;
+    left: 0px;
+    padding: 20px;
     color: white;
+`
+
+const MenuButton = styled.button`
+    height: 50px;
+    font-size: 20px;
+    width: 150px;
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+
+    &:hover {
+        color: darkred;
+    }
 `

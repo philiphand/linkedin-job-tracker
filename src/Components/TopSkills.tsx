@@ -53,7 +53,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 400px;
-    margin-top: 30px;
+    margin-top: 10px;
 `
 
 const Title = styled.h2`
