@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-
+import fetch from "node-fetch"
 
 export const TopSkills: React.FC = () => {
+    const [skills, setSkills] = useState([])
+
+    useEffect(() => {
+        fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/03192021").then(res => console.log(res))
+
+    }, [])
+
     return (
         <Wrapper>
             <Title>Most in-demand tech skills</Title>
@@ -17,6 +24,5 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.h1`
-    padding-left: 50px;
     color: white;
 `

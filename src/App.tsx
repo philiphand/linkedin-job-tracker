@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Header } from "./Components/Header";
+import { TopSkills } from "./Components/TopSkills";
 
 export const App: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ export const App: React.FC = () => {
       <Header />
       <Content>
         <h2>Top 10 skills</h2>
+        <TopSkills />
       </Content>
     </div>
   );
