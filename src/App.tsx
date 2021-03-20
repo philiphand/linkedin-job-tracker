@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Header } from "./Components/Header";
+import { Header } from "./Components/HeaderMenu/Header";
 import { TopSkills } from "./Components/TopSkills";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 export const App: React.FC = () => {
   return (

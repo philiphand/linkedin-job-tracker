@@ -7,12 +7,23 @@ interface Skill {
     searchResultSum: string;
 }
 
+const getToday = () => {
+    var now = new Date();
+    var dd = String(now.getDate()).padStart(2, '0')
+    var mm = String(now.getMonth() + 1).padStart(2, '0') //January is 0
+    var yyyy = now.getFullYear()
+
+
+    const today = mm + dd + yyyy
+    return today
+}
+
 export const TopSkills: React.FC = () => {
     const [skills, setSkills] = useState<Skill[]>([])
     const [top10Skills, setTop10Skills] = useState<Skill[]>([])
 
     useEffect(() => {
-        fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/03192021").then(res => {
+        fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/" + getToday()).then(res => {
             res.json().then(data => {
                 console.log(data)
                 // Sorts all skills by searchResultSum in descending order
@@ -21,9 +32,11 @@ export const TopSkills: React.FC = () => {
 
                 let newArray = []
                 for (let i = 0; i < 10; i++) {
+                    if (data.entities[i].skillName === "Csharp") data.entities[i].skillName = "C#"
                     newArray.push(data.entities[i])
                 }
                 setTop10Skills(newArray)
+                console.log(getToday())
             })
         })
 
@@ -32,16 +45,17 @@ export const TopSkills: React.FC = () => {
 
     return (
         <Wrapper>
-            <Title>Todays top 10 skills in Norway</Title>
+            <Title>Today's top 10 skills in Norway</Title>
             {
                 top10Skills.map(skill => {
-                    console.log(skill)
-                    return (
-                        <SkillWrapper key={top10Skills.indexOf(skill)}>
-                            <SkillText>{skills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                            <SumText>{`${skill.searchResultSum} search results `}</SumText>
-                        </SkillWrapper>
-                    )
+                    if (skill) {
+                        return (
+                            <SkillWrapper key={top10Skills.indexOf(skill)}>
+                                <SkillText>{skills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                                <SumText>{`${skill.searchResultSum} search results `}</SumText>
+                            </SkillWrapper>
+                        )
+                    }
                 })
 
             }
@@ -73,6 +87,7 @@ const SkillWrapper = styled.div`
 const SkillText = styled.p`
     font-size: 20px;
     font-weight: bold;
+    margin: 5px;
 `
 
 const SumText = styled.p`
