@@ -8,7 +8,6 @@ export const App: React.FC = () => {
     <div>
       <Header />
       <Content>
-        <h2>Top 10 skills</h2>
         <TopSkills />
       </Content>
     </div>
