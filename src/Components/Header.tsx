@@ -17,7 +17,8 @@ const Wrapper = styled.div`
     align-items: center;
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
+    position: absolute;
     padding-left: 50px;
     color: white;
 `
