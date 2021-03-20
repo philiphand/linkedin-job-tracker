@@ -1,22 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { Header } from "./Components/HeaderMenu/Header";
-import { TopSkills } from "./Components/TopSkills";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { TodayTopTen } from "./Components/Pages/Today/TodayTopTen";
+import { TodayAll } from "./Components/Pages/Today/TodayAll";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export const App: React.FC = () => {
   return (
-    <div>
+    <Router>
       <Header />
       <Content>
-        <TopSkills />
+        <Switch>
+          <Route path="/today/top/10">
+            <TodayTopTen />
+          </Route>
+          <Route path="/today/all">
+            <TodayAll />
+          </Route>
+        </Switch>
       </Content>
-    </div>
+    </Router>
   );
 }
 
