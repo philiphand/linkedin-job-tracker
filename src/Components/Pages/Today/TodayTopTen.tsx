@@ -32,6 +32,7 @@ export const TodayTopTen: React.FC = () => {
                 for (let i = 0; i < 10; i++) {
                     // Handle incorrect names here
                     if (data.entities[i].skillName === "Csharp") data.entities[i].skillName = "C#"
+                    if (data.entities[i].skillName === "CICD") data.entities[i].skillName = "CI/CD"
                     newArray.push(data.entities[i])
                 }
                 setTop10Skills(newArray)

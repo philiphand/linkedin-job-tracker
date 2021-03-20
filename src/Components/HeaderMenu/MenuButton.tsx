@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 
 interface Props {
     children: JSX.Element[] | JSX.Element;
@@ -8,12 +7,12 @@ interface Props {
 
 export const MenuButton: React.FC<Props> = ({ children }) => {
     return (
-        <Wrapper numberOfChildren={Array.isArray(children) ? children.length : 1}>
+        <Wrapper growHeight={Array.isArray(children) ? `${children.length * 100}%` : "100%"}>
             <Button>
                 {children && Array.isArray(children) && children.map((child: any) => {
                     return (
                         <div>
-                            { child}
+                            {child}
                         </div>
                     )
                 })}
@@ -23,7 +22,7 @@ export const MenuButton: React.FC<Props> = ({ children }) => {
     );
 }
 
-const Wrapper = styled.div<{ numberOfChildren: number }>`
+const Wrapper = styled.div<{ growHeight: string }>`
     height: 70px;
     font-size: 20px;
     width: 150px;
@@ -36,10 +35,18 @@ const Wrapper = styled.div<{ numberOfChildren: number }>`
     padding: 0;
     overflow: hidden;
 
+    transition: height 0.15s ease-out;
+
     &:hover {
+        height: ${props => { return props.growHeight }};
+        transition: height 0.25s ease-in;
+    }
+
+
+    /* &:hover {
         animation-duration: 0.4s;
         animation-name: grow;
-        height: 300%;
+        height: ${props => { return props.growHeight }};
     }
 
     @keyframes grow {
@@ -48,40 +55,11 @@ const Wrapper = styled.div<{ numberOfChildren: number }>`
         }
 
         to {
-            height: 300%;
+            height: ${props => { return props.growHeight }};
         }
-    }
+    } */
 `
 
 const Button = styled.div`
     height: 70px;
-`
-
-const Name = styled.p`
-    height: 100%;
-    color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-        animation-duration: 0.4s;
-        animation-name: fadeRed;
-        color: darkred;
-        text-decoration: underline;
-    }
-
-    @keyframes fadeRed {
-        from {
-            color: white;
-            text-decoration: none;
-        }
-
-        to {
-            color: darkred;
-            text-decoration: underline;
-        }
-    }
 `

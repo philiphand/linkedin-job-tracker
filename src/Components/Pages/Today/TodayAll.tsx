@@ -27,6 +27,12 @@ export const TodayAll: React.FC = () => {
                 console.log(data)
                 // Sorts all skills by searchResultSum in descending order
                 data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
+
+                data.entities.forEach((entity: { skillName: string; }) => {
+                    if (entity.skillName === "Csharp") entity.skillName = "C#"
+                    if (entity.skillName === "CICD") entity.skillName = "CI/CD"
+                })
+
                 setSkills(data.entities)
             })
         })

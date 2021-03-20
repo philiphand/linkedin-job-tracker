@@ -9,10 +9,12 @@ export const Header: React.FC = () => {
         <Wrapper>
             <Title>Most in-demand tech skills</Title>
             <MenuButton>
-                <MenuOption name="History" url="/today/top/10" />
+                <MenuOption name="History" url="/history/week" />
+                <MenuOption name="Coming soon!" url="/history/week" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Trending" url="/today/top/10" />
+                <MenuOption name="Trending" url="/trending" />
+                <MenuOption name="Coming soon!" url="/trending" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Today" url="/today/top/10" />
@@ -20,11 +22,13 @@ export const Header: React.FC = () => {
                 <MenuOption name="All" url="/today/all" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Category" url="/today/top/10" />
-                <MenuOption name="Programming languages" url="/today/top/10" />
+                <MenuOption name="Categories" url="/categories" />
+                <MenuOption name="Programming languages" url="/categories/languages" />
+                <MenuOption name="Frameworks and libraries" url="/categories/libraries" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="About" url="/today/top/10" />
+                <MenuOption name="About" url="/about" />
+                <MenuOption name="Coming soon!" url="/about" />
             </MenuButton>
         </Wrapper>
     );
