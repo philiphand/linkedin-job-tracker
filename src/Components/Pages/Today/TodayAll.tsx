@@ -1,58 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components"
-import fetch from "node-fetch"
+import { Skill } from "../../../App";
 
-interface Skill {
-    skillName: string;
-    searchResultSum: string;
+interface Props {
+    skillsToday: Skill[];
 }
 
-const getToday = () => {
-    const now = new Date();
-    const dd = String(now.getDate()).padStart(2, '0')
-    const mm = String(now.getMonth() + 1).padStart(2, '0') // January is 0
-    const yyyy = now.getFullYear()
-    const today = mm + dd + yyyy
-
-    return today
-}
-
-export const TodayAll: React.FC = () => {
-    const [skills, setSkills] = useState<Skill[]>([])
-
-    useEffect(() => {
-        // Get today's data
-        fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/" + getToday()).then(res => {
-            res.json().then(data => {
-                console.log(data)
-                // Sorts all skills by searchResultSum in descending order
-                data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
-
-                data.entities.forEach((entity: { skillName: string; }) => {
-                    if (entity.skillName === "Csharp") entity.skillName = "C#"
-                    if (entity.skillName === "CICD") entity.skillName = "CI/CD"
-                })
-
-                setSkills(data.entities)
-            })
-        })
-
-    }, [])
-
+export const TodayAll: React.FC<Props> = ({ skillsToday }) => {
 
     return (
         <Wrapper>
-            <Title>All search results in Norway</Title>
+            <Title>All of today's skills in Norway</Title>
             {
-                skills.map(skill => {
-                    if (skill) {
-                        return (
-                            <SkillWrapper key={skills.indexOf(skill)}>
-                                <SkillText>{skills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                                <SumText>{`${skill.searchResultSum} search results `}</SumText>
-                            </SkillWrapper>
-                        )
-                    }
+                skillsToday.map(skill => {
+                    return (
+                        <SkillWrapper key={skillsToday.indexOf(skill)}>
+                            <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                            <SumText>{`${skill.searchResultSum} job listings`}</SumText>
+                        </SkillWrapper>
+                    )
                 })
 
             }

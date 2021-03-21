@@ -11,7 +11,7 @@ export const MenuButton: React.FC<Props> = ({ children }) => {
             <Button>
                 {children && Array.isArray(children) && children.map((child: any) => {
                     return (
-                        <div>
+                        <div key={children.indexOf(child)}>
                             {child}
                         </div>
                     )
@@ -25,7 +25,7 @@ export const MenuButton: React.FC<Props> = ({ children }) => {
 const Wrapper = styled.div<{ growHeight: string }>`
     height: 70px;
     font-size: 20px;
-    width: 150px;
+    width: 170px;
     background-color: black;
     color: white;
     border: none;
@@ -41,23 +41,6 @@ const Wrapper = styled.div<{ growHeight: string }>`
         height: ${props => { return props.growHeight }};
         transition: height 0.25s ease-in;
     }
-
-
-    /* &:hover {
-        animation-duration: 0.4s;
-        animation-name: grow;
-        height: ${props => { return props.growHeight }};
-    }
-
-    @keyframes grow {
-        from {
-            height: 100%;
-        }
-
-        to {
-            height: ${props => { return props.growHeight }};
-        }
-    } */
 `
 
 const Button = styled.div`

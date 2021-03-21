@@ -22,9 +22,11 @@ export const Header: React.FC = () => {
                 <MenuOption name="All" url="/today/all" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Categories" url="/categories" />
+                <MenuOption name="Categories" url="/categories/languages" />
                 <MenuOption name="Programming languages" url="/categories/languages" />
                 <MenuOption name="Frameworks and libraries" url="/categories/libraries" />
+                <MenuOption name="Software" url="/categories/software" />
+                <MenuOption name="Other" url="/categories/other" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="About" url="/about" />
