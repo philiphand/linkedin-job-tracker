@@ -28,38 +28,17 @@ export const App: React.FC = () => {
 
 	useEffect(() => {
 
-		// Get yesterday's data
-		if (false) fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/" + getYesterday()).then(res => {
-			res.json().then(data => {
-				console.log(data)
-				// Sorts all skills by searchResultSum in descending order
-				let allEntities = data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
-
-				// Handle incorrect skill names here
-				allEntities.forEach((entity: { skillName: string; }) => {
-					if (entity.skillName === "Csharp") entity.skillName = "C#"
-					if (entity.skillName === "CICD") entity.skillName = "CI/CD"
-				})
-
-				let topTen = []
-				for (let i = 0; i < 10; i++) {
-					// Handle incorrect names here
-					topTen.push(allEntities[i])
-				}
-
-				setTopTenSkillsToday(topTen)
-				setSkillsToday(allEntities)
-			})
-		})
-
 		const historyDates = getHistory()
 		let allResults: any = []
+
+		// WARNING
+		// This loop could become expensive as the database grows
 
 		historyDates.forEach(date => {
 
 			fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/" + date).then(res => {
 				res.json().then(data => {
-					console.log(data)
+
 					// Sorts all skills by searchResultSum in descending order
 					let result = data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
 
@@ -94,6 +73,9 @@ export const App: React.FC = () => {
 			<Content>
 				<Switch>
 					<Route path="/history">
+						<History allSkillsHistory={allSkillsHistory} />
+					</Route>
+					<Route path="/trending">
 						<History allSkillsHistory={allSkillsHistory} />
 					</Route>
 					<Route path="/today/top/10">

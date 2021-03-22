@@ -13,7 +13,11 @@ export const programmingLanguages = [
     "HTML",
     "CSS",
     "Kotlin",
-    "PHP"
+    "PHP",
+    "Golang",
+    "Bash",
+    "Shell",
+    "Powershell"
 ]
 
 export const software = [

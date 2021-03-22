@@ -13,7 +13,6 @@ export const Header: React.FC = () => {
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Trending" url="/trending" />
-                <MenuOption name="Coming soon!" url="/trending" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Today" url="/today/top/10" />

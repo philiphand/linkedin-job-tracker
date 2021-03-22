@@ -25,7 +25,7 @@ export const getLastWeek = () => {
 
 }
 
-// Not currently in use
+
 // Iterates through every day from the day of the first database entry to yesterday
 
 export const getHistory = () => {
@@ -42,8 +42,6 @@ export const getHistory = () => {
     for (day; day <= 31; day++) {
         date = combineDate(month, day, year)
         historyDates.push(date)
-
-        console.log(combineDate(month, day, year))
 
         if (date === yesterday) break
         if (day === 31) {
