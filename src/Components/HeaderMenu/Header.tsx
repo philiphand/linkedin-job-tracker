@@ -9,8 +9,7 @@ export const Header: React.FC = () => {
         <Wrapper>
             <Title>Most in-demand tech skills</Title>
             <MenuButton>
-                <MenuOption name="History" url="/history/week" />
-                <MenuOption name="Coming soon!" url="/history/week" />
+                <MenuOption name="History" url="/history" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Trending" url="/trending" />
@@ -30,7 +29,6 @@ export const Header: React.FC = () => {
             </MenuButton>
             <MenuButton>
                 <MenuOption name="About" url="/about" />
-                <MenuOption name="Coming soon!" url="/about" />
             </MenuButton>
         </Wrapper>
     );
