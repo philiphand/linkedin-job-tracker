@@ -9,6 +9,7 @@ import { History } from "./Components/Pages/History/History";
 import { libraries, other, programmingLanguages, software } from "./Scripts/categories";
 import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { About } from "./Components/Pages/About/About";
+import { JobTitles } from "./Components/Pages/JobTitles/JobTitles";
 
 export interface Skill {
 	skillName: string;
@@ -16,7 +17,7 @@ export interface Skill {
 }
 
 // Main component
-// This is where all data is fetched from the API and stored in a "global state"
+// This is where most data is fetched from the API and stored in a "global state"
 // No state management library is used, all state is simply passed as props
 // This is because the application has few "levels" and is relatively non-hierchial
 // All data is fetched once, to prevent loading times when switching pages
@@ -25,6 +26,8 @@ export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[Skill[]]>([[]])
 	const [skillsToday, setSkillsToday] = useState<Skill[]>([])
 	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
+	const [programmerSkills, setProgrammerSkills] = useState()
+
 
 	useEffect(() => {
 
@@ -33,6 +36,7 @@ export const App: React.FC = () => {
 
 		// WARNING
 		// This loop could become expensive as the database grows
+		// It fetches all records in the database table
 
 		historyDates.forEach(date => {
 
@@ -54,7 +58,6 @@ export const App: React.FC = () => {
 					if (date === getYesterday()) {
 						let topTen = []
 						for (let i = 0; i < 10; i++) {
-							// Handle incorrect names here
 							topTen.push(result[i])
 						}
 						setTopTenSkillsToday(topTen)
@@ -64,6 +67,16 @@ export const App: React.FC = () => {
 			})
 		})
 		setAllSkillsHistory(allResults)
+
+		const yesterday = getYesterday()
+
+		fetch("https://linkedin-job-tracker-api.azurewebsites.net/programmer/" + yesterday).then(res => {
+			res.json().then(data => {
+				setProgrammerSkills(data)
+				console.log(data)
+			})
+		})
+
 		console.log(allResults)
 	}, [])
 
@@ -95,6 +108,9 @@ export const App: React.FC = () => {
 					</Route>
 					<Route path="/categories/other">
 						<Category skillsToday={skillsToday} categoryArray={other} categoryName="Other keywords" />
+					</Route>
+					<Route path="/programmer">
+						<JobTitles programmerSkills={programmerSkills} />
 					</Route>
 					<Route path="/about">
 						<About />
