@@ -3,11 +3,10 @@ import styled from "styled-components"
 import { Skill } from "../../../App";
 
 interface Props {
-    allSKillsHistory: Skill[];
+    allSkillsHistory: [Skill[]];
 }
 
-export const TodayAll: React.FC<Props> = ({ allSKillsHistory }) => {
-
+export const Trending: React.FC<Props> = ({ allSkillsHistory }) => {
 
 
     return (

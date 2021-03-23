@@ -4,26 +4,26 @@ import { Skill } from "../../../App";
 import { extractCategoryToday } from "../../../Scripts/categoryHelper";
 
 interface Props {
-    skillsToday: Skill[];
+    allSkillsToday: Skill[];
     categoryArray: String[];
     categoryName: String;
 }
 
-export const Category: React.FC<Props> = ({ skillsToday, categoryArray, categoryName }) => {
-    const [languageSearchResults, setLanguageSearchResults] = useState<Skill[]>([])
+export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categoryName }) => {
+    const [categorySkills, setCategorySkills] = useState<Skill[]>([])
 
     useEffect(() => {
-        setLanguageSearchResults(extractCategoryToday(skillsToday, categoryArray))
-    }, [categoryArray, skillsToday])
+        setCategorySkills(extractCategoryToday(allSkillsToday, categoryArray))
+    }, [categoryArray, allSkillsToday])
 
     return (
         <Wrapper>
             <Title>{categoryName} in Norway</Title>
             {
-                languageSearchResults.map(skill => {
+                categorySkills.map(skill => {
                     return (
-                        <SkillWrapper key={languageSearchResults.indexOf(skill)}>
-                            <SkillText>{languageSearchResults.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                        <SkillWrapper key={categorySkills.indexOf(skill)}>
+                            <SkillText>{categorySkills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
                             <SumText>{`${skill.searchResultSum} job listings `}</SumText>
                         </SkillWrapper>
                     )

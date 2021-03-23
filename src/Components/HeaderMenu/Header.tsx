@@ -27,8 +27,12 @@ export const Header: React.FC = () => {
                 <MenuOption name="Other" url="/categories/other" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Job titles" url="/programmer" />
-                <MenuOption name="Programmer" url="/programmer" />
+                <MenuOption name="Job titles" url="/jobtitles" />
+                <MenuOption name="Full Stack Developer" url="/jobtitles/fullstack" />
+                <MenuOption name="Back End Developer" url="/jobtitles/backend" />
+                <MenuOption name="Front End Developer" url="/jobtitles/frontend" />
+                <MenuOption name="DevOps Engineer" url="/jobtitles/devops" />
+                <MenuOption name="Data Scientist" url="/jobtitles/scientist" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="About" url="/about" />

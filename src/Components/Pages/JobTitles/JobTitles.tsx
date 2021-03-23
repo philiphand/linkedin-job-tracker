@@ -1,56 +1,55 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-
-interface ProgrammerSkills {
-    jobListingKeywords: [string[]];
-}
-
+import { Skill } from "../../../App";
 interface Props {
-    programmerSkills: ProgrammerSkills;
+    jobTitleSkillGroups: [String[]]
+    jobTitle: String;
 }
 
-interface Skill {
-    skillName: string;
-    count: string;
+interface SkillCount {
+    skillName: String;
+    count: number;
 }
 
+export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
 
-export const JobTitles: React.FC<Props> = ({ programmerSkills }) => {
-    const [combinedSkills, setCombinedSkills] = useState<String[]>([])
-    const [skillCounts, setSkillCounts] = useState<Skill[]>([])
+    const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
 
     useEffect(() => {
-        let newArray: string[] = []
-        programmerSkills.jobListingKeywords.forEach((keywords: any) => {
-            keywords.forEach((keyword: string) => {
-                newArray.push(keyword)
+        let newArray: String[] = []
+        jobTitleSkillGroups.forEach((skillGroup) => {
+            skillGroup.forEach(skill => {
+                newArray.push(skill)
             });
         });
 
-        var counts: any = {}
-        // This function counts duplicate values
-        newArray.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
+        var counts: any = {} // This function counts all occurences of each keyword
+        newArray.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
 
-        let countsArray = []
+        // Re-formats keyword object
+        let countsArray: SkillCount[] = []
         for (const property in counts) {
             countsArray.push({ skillName: property, count: counts[property] })
         }
-        countsArray.sort((a, b) => parseFloat(b.count) - parseFloat(a.count));
+        countsArray.sort((a, b) => b.count - a.count);
 
         setSkillCounts(countsArray)
-        setCombinedSkills(newArray.sort())
-    }, [programmerSkills])
+    }, [jobTitleSkillGroups])
 
     return (
         <Wrapper>
-            <Title>Job titles</Title>
+            <Title>{jobTitle}</Title>
             {
                 skillCounts.map(skill => {
-                    console.log(skill)
                     return (
-                        <p key={skillCounts.indexOf(skill)}>
-                            {skill.skillName + " " + skill.count}
-                        </p>
+                        <SkillWrapper key={skillCounts.indexOf(skill)}>
+                            <SkillText>
+                                {skill.skillName}
+                            </SkillText>
+                            <SumText>
+                                {skill.count}
+                            </SumText>
+                        </SkillWrapper>
                     )
                 })
 

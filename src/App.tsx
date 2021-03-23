@@ -10,28 +10,32 @@ import { libraries, other, programmingLanguages, software } from "./Scripts/cate
 import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { About } from "./Components/Pages/About/About";
 import { JobTitles } from "./Components/Pages/JobTitles/JobTitles";
+import { api_url } from "./Scripts/api";
+import { Trending } from "./Components/Pages/Trending/Trending";
+import { emptyJobTitleObject, jobTitles, JobTitleSkillGroups, TitleShortHands } from "./Scripts/jobTitles";
 
 export interface Skill {
-	skillName: string;
-	searchResultSum: string;
+	skillName: String;
+	searchResultSum: String;
 }
-
-interface ProgrammerSkills {
-	jobListingKeywords: [string[]];
-}
-
 
 // Main component
-// This is where most data is fetched from the API and stored in a "global state"
+// This is where all data is fetched from the API and stored in a "global state"
 // No state management library is used, all state is simply passed as props
 // This is because the application has few "levels" and is relatively non-hierchial
 // All data is fetched once, to prevent loading times when switching pages
 
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[Skill[]]>([[]])
-	const [skillsToday, setSkillsToday] = useState<Skill[]>([])
+	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
 	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
-	const [programmerSkills, setProgrammerSkills] = useState<ProgrammerSkills>({ jobListingKeywords: [[""]] })
+
+	//const [jobTitleSkillGroups, setJobTitleSkillgroups] = useState<JobTitleSkillGroups>()
+	const [devOpsSkills, setDevOpsSkills] = useState<[String[]]>([[]])
+	const [frontEndSkills, setFrontEndSkills] = useState<[String[]]>([[]])
+	const [backEndSkills, setBackEndSkills] = useState<[String[]]>([[]])
+	const [fullStackSkills, setFullStackSkills] = useState<[String[]]>([[]])
+	const [scientistSkills, setScientistSkills] = useState<[String[]]>([[]])
 
 
 	useEffect(() => {
@@ -45,14 +49,14 @@ export const App: React.FC = () => {
 
 		historyDates.forEach(date => {
 
-			fetch("https://linkedin-job-tracker-api.azurewebsites.net/all/" + date).then(res => {
+			fetch(api_url + "all/" + date).then(res => {
 				res.json().then(data => {
 
 					// Sorts all skills by searchResultSum in descending order
 					let result = data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
 
 					// Handle incorrect skill names here
-					result.forEach((entity: { skillName: string; }) => {
+					result.forEach((entity: Skill) => {
 						if (entity.skillName === "Csharp") entity.skillName = "C#"
 						if (entity.skillName === "CICD") entity.skillName = "CI/CD"
 					})
@@ -61,28 +65,33 @@ export const App: React.FC = () => {
 					allResults.push(result)
 
 					if (date === getYesterday()) {
+						setAllSkillsToday(result) // Results from yesterday
 						let topTen = []
 						for (let i = 0; i < 10; i++) {
 							topTen.push(result[i])
 						}
 						setTopTenSkillsToday(topTen)
 					}
-					setSkillsToday(result)
 				})
 			})
 		})
 		setAllSkillsHistory(allResults)
+		console.log(allResults)
 
-		const yesterday = getYesterday()
 
-		fetch("https://linkedin-job-tracker-api.azurewebsites.net/programmer/" + yesterday).then(res => {
-			res.json().then(data => {
-				setProgrammerSkills(data)
-				console.log(data)
+		jobTitles.forEach(title => {
+			fetch(api_url + "jobtitle/" + title).then(res => {
+				res.json().then(data => {
+					const skills = data.keywordGroups
+					if (title === TitleShortHands.devops) setDevOpsSkills(skills)
+					if (title === TitleShortHands.frontend) setFrontEndSkills(skills)
+					if (title === TitleShortHands.backend) setBackEndSkills(skills)
+					if (title === TitleShortHands.fullstack) setFullStackSkills(skills)
+					if (title === TitleShortHands.scientist) setScientistSkills(skills)
+					console.log(skills)
+				})
 			})
 		})
-
-		console.log(allResults)
 	}, [])
 
 	return (
@@ -94,28 +103,40 @@ export const App: React.FC = () => {
 						<History allSkillsHistory={allSkillsHistory} />
 					</Route>
 					<Route path="/trending">
-						<History allSkillsHistory={allSkillsHistory} />
+						<Trending allSkillsHistory={allSkillsHistory} />
 					</Route>
 					<Route path="/today/top/10">
 						<TodayTopTen topTenSkillsToday={topTenSkillsToday} />
 					</Route>
 					<Route path="/today/all">
-						<TodayAll skillsToday={skillsToday} />
+						<TodayAll skillsToday={allSkillsToday} />
 					</Route>
 					<Route path="/categories/languages">
-						<Category skillsToday={skillsToday} categoryArray={programmingLanguages} categoryName="Programming languages" />
+						<Category allSkillsToday={allSkillsToday} categoryArray={programmingLanguages} categoryName="Programming languages" />
 					</Route>
 					<Route path="/categories/libraries">
-						<Category skillsToday={skillsToday} categoryArray={libraries} categoryName="Frameworks and libraries" />
+						<Category allSkillsToday={allSkillsToday} categoryArray={libraries} categoryName="Frameworks and libraries" />
 					</Route>
 					<Route path="/categories/software">
-						<Category skillsToday={skillsToday} categoryArray={software} categoryName="Software" />
+						<Category allSkillsToday={allSkillsToday} categoryArray={software} categoryName="Software" />
 					</Route>
 					<Route path="/categories/other">
-						<Category skillsToday={skillsToday} categoryArray={other} categoryName="Other keywords" />
+						<Category allSkillsToday={allSkillsToday} categoryArray={other} categoryName="Other keywords" />
 					</Route>
-					<Route path="/programmer">
-						<JobTitles programmerSkills={programmerSkills} />
+					<Route path="/jobtitles/devops">
+						<JobTitles jobTitleSkillGroups={devOpsSkills} jobTitle="DevOps Engineer" />
+					</Route>
+					<Route path="/jobtitles/frontend">
+						<JobTitles jobTitleSkillGroups={frontEndSkills} jobTitle="Front End Developer" />
+					</Route>
+					<Route path="/jobtitles/backend">
+						<JobTitles jobTitleSkillGroups={backEndSkills} jobTitle="Back End Developer" />
+					</Route>
+					<Route path="/jobtitles/fullstack">
+						<JobTitles jobTitleSkillGroups={fullStackSkills} jobTitle="Full Stack Developer" />
+					</Route>
+					<Route path="/jobtitles/scientist">
+						<JobTitles jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
 					</Route>
 					<Route path="/about">
 						<About />
