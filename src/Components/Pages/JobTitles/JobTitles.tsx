@@ -1,33 +1,60 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 
-interface Props {
-    programmerSkills: any;
+interface ProgrammerSkills {
+    jobListingKeywords: [string[]];
 }
 
-export const JobTitles: React.FC<Props> = ({ programmerSkills }) => {
-    const [skillCounts, setSkillCounts] = useState([])
+interface Props {
+    programmerSkills: ProgrammerSkills;
+}
 
-    let countingArray: any = {}
+interface Skill {
+    skillName: string;
+    count: string;
+}
+
+
+export const JobTitles: React.FC<Props> = ({ programmerSkills }) => {
+    const [combinedSkills, setCombinedSkills] = useState<String[]>([])
+    const [skillCounts, setSkillCounts] = useState<Skill[]>([])
 
     useEffect(() => {
+        let newArray: string[] = []
+        programmerSkills.jobListingKeywords.forEach((keywords: any) => {
+            keywords.forEach((keyword: string) => {
+                newArray.push(keyword)
+            });
+        });
 
-    }, [])
+        var counts: any = {}
+        // This function counts duplicate values
+        newArray.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
+
+        let countsArray = []
+        for (const property in counts) {
+            countsArray.push({ skillName: property, count: counts[property] })
+        }
+        countsArray.sort((a, b) => parseFloat(b.count) - parseFloat(a.count));
+
+        setSkillCounts(countsArray)
+        setCombinedSkills(newArray.sort())
+    }, [programmerSkills])
 
     return (
         <Wrapper>
             <Title>Job titles</Title>
-            {/* {
-                skillsToday.map(skill => {
+            {
+                skillCounts.map(skill => {
+                    console.log(skill)
                     return (
-                        <SkillWrapper key={skillsToday.indexOf(skill)}>
-                            <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                            <SumText>{`${skill.searchResultSum} job listings`}</SumText>
-                        </SkillWrapper>
+                        <p key={skillCounts.indexOf(skill)}>
+                            {skill.skillName + " " + skill.count}
+                        </p>
                     )
                 })
 
-            } */}
+            }
         </Wrapper>
     );
 }

@@ -16,6 +16,11 @@ export interface Skill {
 	searchResultSum: string;
 }
 
+interface ProgrammerSkills {
+	jobListingKeywords: [string[]];
+}
+
+
 // Main component
 // This is where most data is fetched from the API and stored in a "global state"
 // No state management library is used, all state is simply passed as props
@@ -26,7 +31,7 @@ export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[Skill[]]>([[]])
 	const [skillsToday, setSkillsToday] = useState<Skill[]>([])
 	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
-	const [programmerSkills, setProgrammerSkills] = useState()
+	const [programmerSkills, setProgrammerSkills] = useState<ProgrammerSkills>({ jobListingKeywords: [[""]] })
 
 
 	useEffect(() => {
