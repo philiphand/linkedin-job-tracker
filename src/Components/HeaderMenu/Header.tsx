@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
 }
 
 const Wrapper = styled.div`
-    background-color: #218de6;
+    background-color: #1283df;
     width: 100%;
     display: flex;
     justify-content: center;

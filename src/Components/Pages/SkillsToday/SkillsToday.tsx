@@ -46,6 +46,9 @@ const Content = styled.div`
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 600px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
 `
 
 const Title = styled.h1`

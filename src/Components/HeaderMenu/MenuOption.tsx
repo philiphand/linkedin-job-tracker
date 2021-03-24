@@ -17,7 +17,7 @@ export const MenuOption: React.FC<MenuOptionProps> = ({ name, url }) => {
 
 const Name = styled.p`
     height: 70px;
-    background-color: #218de6;
+    background-color: #1283df;
     color: white;
     text-decoration: none;
     margin: 0;

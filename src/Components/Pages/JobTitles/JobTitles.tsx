@@ -112,7 +112,7 @@ const Content = styled.div`
     align-items: center;
     border: 1px solid gray;
     border-radius: 15px;
-
+    margin: 30px;
 `
 
 const Title = styled.h1`
@@ -153,7 +153,7 @@ const TopSkillNumber = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    margin-left: 100px;
+    margin-left: 80px;
 `
 
 const TopSkillText = styled.div`
