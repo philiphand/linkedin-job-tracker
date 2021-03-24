@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { Skill } from "../../../App";
 interface Props {
     jobTitleSkillGroups: [String[]]
     jobTitle: String;
@@ -11,14 +10,19 @@ interface SkillCount {
     count: number;
 }
 
-export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
 
+export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
+    const [topFiveSkills, setTopFiveSkills] = useState<String[]>([])
+
+    const numberOfListings = jobTitleSkillGroups.length
 
     useEffect(() => {
         let newArray: String[] = []
         jobTitleSkillGroups.forEach((skillGroup) => {
             skillGroup.forEach(skill => {
+                if (skill === "Csharp") skill = "C#"
+                if (skill === "CICD") skill = "CI/CD"
                 newArray.push(skill)
             });
         });
@@ -33,27 +37,49 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
         }
         countsArray.sort((a, b) => b.count - a.count);
 
+        let topFive = []
+        for (let i = 0; i < 5; i++) {
+            countsArray[i] && topFive.push(countsArray[i].skillName)
+        }
+
+
+        setTopFiveSkills(topFive)
         setSkillCounts(countsArray)
     }, [jobTitleSkillGroups])
 
     return (
         <Wrapper>
             <Title>{jobTitle}</Title>
-            {
-                skillCounts.map(skill => {
-                    return (
-                        <SkillWrapper key={skillCounts.indexOf(skill)}>
-                            <SkillText>
-                                {skill.skillName}
-                            </SkillText>
-                            <SumText>
-                                {skill.count}
-                            </SumText>
-                        </SkillWrapper>
-                    )
-                })
+            <div>
+                <TopSkillTitle>Top 5 skills</TopSkillTitle>
+                <TopSkillWrapper>
+                    {
+                        topFiveSkills.map(skillName => {
+                            const index = topFiveSkills.indexOf(skillName) + 1
+                            return (
 
-            }
+                                <TopSkillWrapper key={index}>
+                                    <TopSkillNumber>{index}</TopSkillNumber>
+                                    <TopSkillText>{skillName}</TopSkillText>
+                                </TopSkillWrapper>
+                            )
+                        })
+                    }
+                </TopSkillWrapper>
+            </div>
+            <div>
+                {
+                    skillCounts.map(skill => {
+                        return (
+                            <SkillWrapper key={skillCounts.indexOf(skill)}>
+                                <h5>{Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()}'s have experience with {skill.skillName}
+                                </h5>
+                            </SkillWrapper>
+                        )
+                    })
+
+                }
+            </div>
         </Wrapper>
     );
 }
@@ -61,15 +87,47 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 400px;
+    align-items: center;
     margin-top: 10px;
+    width: 100%;
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
     padding-bottom: 2px;
-    border-bottom: 3px solid darkred;
+    border-bottom: 3px solid black;
     margin: 10px;
     text-align: center;
+`
+
+const TopSkillTitle = styled.h2`
+    text-align: center;
+    font-size: 30px;
+`
+
+const TopSkillWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+`
+
+const TopSkillNumber = styled.div`
+    width: 60px;
+    height: 60px;
+    background-color: green;
+    font-weight: bold;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-left: 50px;
+`
+
+const TopSkillText = styled.div`
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5px;
 `
 
 const SkillWrapper = styled.div`
@@ -77,12 +135,14 @@ const SkillWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 500px;
 `
 
 const SkillText = styled.p`
     font-size: 20px;
     font-weight: bold;
     margin: 5px;
+    display: inline-block;
 `
 
 const SumText = styled.p`

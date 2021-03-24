@@ -2,29 +2,21 @@ import React from "react";
 import styled from "styled-components"
 import { MenuButton } from "./MenuButton";
 import { MenuOption } from "./MenuOption";
-
+import NorwegianFlag from "./../../Images/Flag_of_Norway.png";
 
 export const Header: React.FC = () => {
     return (
         <Wrapper>
-            <Title>Most in-demand tech skills</Title>
             <MenuButton>
                 <MenuOption name="History" url="/history" />
             </MenuButton>
-            <MenuButton>
+            {/* <MenuButton>
                 <MenuOption name="Trending" url="/trending" />
-            </MenuButton>
+            </MenuButton> */}
             <MenuButton>
                 <MenuOption name="Today" url="/today/top/10" />
                 <MenuOption name="Top 10" url="/today/top/10" />
                 <MenuOption name="All" url="/today/all" />
-            </MenuButton>
-            <MenuButton>
-                <MenuOption name="Categories" url="/categories/languages" />
-                <MenuOption name="Programming languages" url="/categories/languages" />
-                <MenuOption name="Frameworks and libraries" url="/categories/libraries" />
-                <MenuOption name="Software" url="/categories/software" />
-                <MenuOption name="Other" url="/categories/other" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Job titles" url="/jobtitles" />
@@ -35,8 +27,17 @@ export const Header: React.FC = () => {
                 <MenuOption name="Data Scientist" url="/jobtitles/scientist" />
             </MenuButton>
             <MenuButton>
+                <MenuOption name="Categories" url="/categories/languages" />
+                <MenuOption name="Programming languages" url="/categories/languages" />
+                <MenuOption name="Frameworks and libraries" url="/categories/libraries" />
+                <MenuOption name="Software" url="/categories/software" />
+                <MenuOption name="Other" url="/categories/other" />
+            </MenuButton>
+            <MenuButton>
                 <MenuOption name="About" url="/about" />
             </MenuButton>
+            <InfoText>All stats from the Norwegian LinkedIn job board</InfoText>
+            <Flag src={NorwegianFlag} />
         </Wrapper>
     );
 }
@@ -55,4 +56,21 @@ const Title = styled.h2`
     left: 30px;
     color: white;
     display: flex;
+`
+
+const Flag = styled.img`
+    position: absolute;
+    height: 50px;
+    width: auto;
+    left: 20px;
+    margin: 10px;
+`
+
+const InfoText = styled.p`
+    color: white;
+    position: absolute;
+    width: 220px;
+    left: 110px;
+    margin: 15px;
+    font-size: 14px;
 `

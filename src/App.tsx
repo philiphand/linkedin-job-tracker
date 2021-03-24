@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Header } from "./Components/HeaderMenu/Header";
-import { TodayTopTen } from "./Components/Pages/Today/TodayTopTen";
-import { TodayAll } from "./Components/Pages/Today/TodayAll";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Category } from "./Components/Pages/Categories/Category";
-import { History } from "./Components/Pages/History/History";
-import { libraries, other, programmingLanguages, software } from "./Scripts/categories";
+import { BrowserRouter as Router } from "react-router-dom";
 import { getHistory, getYesterday } from "./Scripts/dateHelper";
-import { About } from "./Components/Pages/About/About";
-import { JobTitles } from "./Components/Pages/JobTitles/JobTitles";
 import { api_url } from "./Scripts/api";
-import { Trending } from "./Components/Pages/Trending/Trending";
-import { emptyJobTitleObject, jobTitles, JobTitleSkillGroups, TitleShortHands } from "./Scripts/jobTitles";
+import { jobTitles, TitleShortHands } from "./Scripts/jobTitles";
+import { RouteList } from "./Components/RouteList/RouteList";
 
 export interface Skill {
 	skillName: String;
 	searchResultSum: String;
+}
+
+export interface DatedResult {
+	date: number;
+	content: Skill[];
 }
 
 // Main component
@@ -26,7 +24,7 @@ export interface Skill {
 // All data is fetched once, to prevent loading times when switching pages
 
 export const App: React.FC = () => {
-	const [allSkillsHistory, setAllSkillsHistory] = useState<[Skill[]]>([[]])
+	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
 	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
 	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
 
@@ -42,10 +40,12 @@ export const App: React.FC = () => {
 
 		const historyDates = getHistory()
 		let allResults: any = []
+		let datedResults: [DatedResult] = [{ date: 0, content: [] }]
 
 		// WARNING
 		// This loop could become expensive as the database grows
 		// It fetches all records in the database table
+		// TODO: Try to store some of the data directly in the app repository (For example month by month)
 
 		historyDates.forEach(date => {
 
@@ -55,13 +55,13 @@ export const App: React.FC = () => {
 					// Sorts all skills by searchResultSum in descending order
 					let result = data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
 
-					// Handle incorrect skill names here
+					// Handle incorrect skill names here (TODO: Move this to the API)
 					result.forEach((entity: Skill) => {
 						if (entity.skillName === "Csharp") entity.skillName = "C#"
 						if (entity.skillName === "CICD") entity.skillName = "CI/CD"
 					})
 
-
+					datedResults.push({ date: data.date, content: result })
 					allResults.push(result)
 
 					if (date === getYesterday()) {
@@ -75,12 +75,12 @@ export const App: React.FC = () => {
 				})
 			})
 		})
-		setAllSkillsHistory(allResults)
+		setAllSkillsHistory(datedResults)
 		console.log(allResults)
 
 
 		jobTitles.forEach(title => {
-			fetch(api_url + "jobtitle/" + title).then(res => {
+			fetch(api_url + "jobtitle/" + title + "/" + getYesterday()).then(res => {
 				res.json().then(data => {
 					const skills = data.keywordGroups
 					if (title === TitleShortHands.devops) setDevOpsSkills(skills)
@@ -88,7 +88,6 @@ export const App: React.FC = () => {
 					if (title === TitleShortHands.backend) setBackEndSkills(skills)
 					if (title === TitleShortHands.fullstack) setFullStackSkills(skills)
 					if (title === TitleShortHands.scientist) setScientistSkills(skills)
-					console.log(skills)
 				})
 			})
 		})
@@ -98,50 +97,16 @@ export const App: React.FC = () => {
 		<Router>
 			<Header />
 			<Content>
-				<Switch>
-					<Route path="/history">
-						<History allSkillsHistory={allSkillsHistory} />
-					</Route>
-					<Route path="/trending">
-						<Trending allSkillsHistory={allSkillsHistory} />
-					</Route>
-					<Route path="/today/top/10">
-						<TodayTopTen topTenSkillsToday={topTenSkillsToday} />
-					</Route>
-					<Route path="/today/all">
-						<TodayAll skillsToday={allSkillsToday} />
-					</Route>
-					<Route path="/categories/languages">
-						<Category allSkillsToday={allSkillsToday} categoryArray={programmingLanguages} categoryName="Programming languages" />
-					</Route>
-					<Route path="/categories/libraries">
-						<Category allSkillsToday={allSkillsToday} categoryArray={libraries} categoryName="Frameworks and libraries" />
-					</Route>
-					<Route path="/categories/software">
-						<Category allSkillsToday={allSkillsToday} categoryArray={software} categoryName="Software" />
-					</Route>
-					<Route path="/categories/other">
-						<Category allSkillsToday={allSkillsToday} categoryArray={other} categoryName="Other keywords" />
-					</Route>
-					<Route path="/jobtitles/devops">
-						<JobTitles jobTitleSkillGroups={devOpsSkills} jobTitle="DevOps Engineer" />
-					</Route>
-					<Route path="/jobtitles/frontend">
-						<JobTitles jobTitleSkillGroups={frontEndSkills} jobTitle="Front End Developer" />
-					</Route>
-					<Route path="/jobtitles/backend">
-						<JobTitles jobTitleSkillGroups={backEndSkills} jobTitle="Back End Developer" />
-					</Route>
-					<Route path="/jobtitles/fullstack">
-						<JobTitles jobTitleSkillGroups={fullStackSkills} jobTitle="Full Stack Developer" />
-					</Route>
-					<Route path="/jobtitles/scientist">
-						<JobTitles jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
-					</Route>
-					<Route path="/about">
-						<About />
-					</Route>
-				</Switch>
+				<RouteList appData={{
+					allSkillsHistory,
+					topTenSkillsToday,
+					allSkillsToday,
+					devOpsSkills,
+					frontEndSkills,
+					backEndSkills,
+					fullStackSkills,
+					scientistSkills
+				}} />
 			</Content>
 		</Router>
 	);

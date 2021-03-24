@@ -13,7 +13,7 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
     const [categorySkills, setCategorySkills] = useState<Skill[]>([])
 
     useEffect(() => {
-        setCategorySkills(extractCategoryToday(allSkillsToday, categoryArray))
+        setCategorySkills(extractCategoryToday(allSkillsToday, categoryArray)) // Move this helperfunction back here
     }, [categoryArray, allSkillsToday])
 
     return (
@@ -37,13 +37,13 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 500px;
     margin-top: 10px;
 `
 
 const Title = styled.h2`
     padding-bottom: 2px;
-    border-bottom: 3px solid darkred;
+    border-bottom: 3px solid black;
     margin: 10px;
     text-align: center;
 `
@@ -53,6 +53,7 @@ const SkillWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 60%;
 `
 
 const SkillText = styled.p`
