@@ -19,17 +19,18 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
     return (
         <Wrapper>
             <Title>{categoryName} in Norway</Title>
-            {
-                categorySkills.map(skill => {
-                    return (
-                        <SkillWrapper key={categorySkills.indexOf(skill)}>
-                            <SkillText>{categorySkills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                            <SumText>{`${skill.searchResultSum} job listings `}</SumText>
-                        </SkillWrapper>
-                    )
-                })
-
-            }
+            <SkillsWrapper>
+                {
+                    categorySkills.map(skill => {
+                        return (
+                            <SkillWrapper key={categorySkills.indexOf(skill)}>
+                                <SkillText>{categorySkills.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                                <SumText>{`${skill.searchResultSum} job listings `}</SumText>
+                            </SkillWrapper>
+                        )
+                    })
+                }
+            </SkillsWrapper>
         </Wrapper>
     );
 }
@@ -37,7 +38,6 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 500px;
     margin-top: 10px;
 `
 
@@ -48,12 +48,18 @@ const Title = styled.h2`
     text-align: center;
 `
 
+const SkillsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
 const SkillWrapper = styled.div`
     border-bottom: 1px solid gray;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 60%;
+    width: 350px;
 `
 
 const SkillText = styled.p`

@@ -40,15 +40,18 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
             <HistoryWrapper>
                 {
                     topTenSkillsHistory.map(array => {
-                        // let formattedDate = array.date.toString()
-                        // const month = formattedDate.substring(0, 2) + "."
-                        // const day = formattedDate.substring(2, 2) + "."
-                        // const year = formattedDate.substring(4, 4)
-                        // formattedDate = day + month + year
+                        let formattedDate = array.date.toString()
+                        const month = formattedDate.substring(0, 2) + "."
+                        console.log(month)
+                        const day = formattedDate.substring(2, 4) + "."
+                        console.log(day)
+                        const year = formattedDate.substring(4, 8)
+                        console.log(year)
+                        formattedDate = day + month + year
 
                         return (
                             <SkillDayWrapper key={topTenSkillsHistory.indexOf(array)}>
-                                <p>{array.date}</p>
+                                <Date>{formattedDate}</Date>
                                 {
                                     array.content.map(skill => {
                                         return (
@@ -87,15 +90,18 @@ const SubTitle = styled.h3`
     text-align: center;
 `
 
+const Date = styled.p`
+    margin-left: 10px;
+`
 
 const SkillDayWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: left;
+    border: 1px solid black;
 `
 
 const SkillWrapper = styled.div`
-    border-bottom: 1px solid gray;
     display: flex;
     justify-content: space-between;
     align-items: center;
