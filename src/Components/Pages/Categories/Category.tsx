@@ -40,6 +40,7 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 10px;
 `
 
@@ -48,7 +49,8 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid silver;
+    width: 400px;
     border-radius: 15px;
     padding-left: 20px;
     padding-right: 20px;

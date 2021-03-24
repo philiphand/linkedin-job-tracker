@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { programmingLanguages, libraries, software, other } from "../../Scripts/categories";
-import { About } from "../Pages/About/About";
+import { Technologies } from "../Pages/About/Technologies";
 import { Category } from "../Pages/Categories/Category";
 import { JobTitleHome } from "../Pages/JobTitles/JobTitleHome";
 import { JobTitles } from "../Pages/JobTitles/JobTitles";
 import { SkillsToday } from "../Pages/SkillsToday/SkillsToday";
 import { History } from "../Pages/History/History";
+import { Scraping } from "../Pages/About/Scraping";
 
 interface AppData {
     allSkillsHistory: any;
@@ -17,6 +18,7 @@ interface AppData {
     backEndSkills: any;
     fullStackSkills: any;
     scientistSkills: any;
+    combinedJobTitleSkills: any;
 }
 
 interface Props {
@@ -33,7 +35,8 @@ export const RouteList: React.FC<Props> = ({
         frontEndSkills,
         backEndSkills,
         fullStackSkills,
-        scientistSkills
+        scientistSkills,
+        combinedJobTitleSkills
     }
 }) => {
     return (
@@ -78,10 +81,13 @@ export const RouteList: React.FC<Props> = ({
                 <JobTitles jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
             </Route>
             <Route path="/jobtitles">
-                <JobTitleHome />
+                <JobTitleHome combinedJobTitleSkills={combinedJobTitleSkills} />
             </Route>
-            <Route path="/about">
-                <About />
+            <Route path="/about/scraping">
+                <Scraping />
+            </Route>
+            <Route path="/about/technologies">
+                <Technologies />
             </Route>
         </Switch>
     );

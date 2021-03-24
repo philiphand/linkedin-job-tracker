@@ -8,7 +8,9 @@ export const Header: React.FC = () => {
     return (
         <Wrapper>
             <MenuButton>
-                <MenuOption name="History" url="/history" />
+                <MenuOption name="History" url="/history/chart" />
+                <MenuOption name="Chart" url="/history/chart" />
+                <MenuOption name="Table" url="/history/table" />
             </MenuButton>
             {/* <MenuButton>
                 <MenuOption name="Trending" url="/trending" />
@@ -34,7 +36,9 @@ export const Header: React.FC = () => {
                 <MenuOption name="Other" url="/categories/other" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="About" url="/about" />
+                <MenuOption name="About" url="/about/search" />
+                <MenuOption name="Scraping method" url="/about/scraping" />
+                <MenuOption name="Technologies" url="/about/technologies" />
             </MenuButton>
             <InfoText>All stats are scraped from the LinkedIn job board, filtered by jobs in Norway</InfoText>
             <Flag src={NorwegianFlag} />
@@ -43,11 +47,12 @@ export const Header: React.FC = () => {
 }
 
 const Wrapper = styled.div`
-    background-color: #1283df;
     width: 100%;
     display: flex;
     justify-content: center;
     height: 70px;
+    border-bottom: 1px solid silver;
+    background-color: black;
 `
 
 const Title = styled.h2`

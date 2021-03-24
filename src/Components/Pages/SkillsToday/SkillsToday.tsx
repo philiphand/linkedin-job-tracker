@@ -42,7 +42,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid silver;
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 600px;

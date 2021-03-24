@@ -3,10 +3,10 @@ import styled from "styled-components"
 import { Skill } from "../../../App";
 
 interface Props {
-    skillsToday?: Skill[];
+    combinedJobTitleSkills: [[[String[]]]];
 }
 
-export const JobTitleHome: React.FC<Props> = ({ skillsToday }) => {
+export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
 
     return (
         <Wrapper>

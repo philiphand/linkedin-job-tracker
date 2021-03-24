@@ -110,7 +110,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid silver;
     border-radius: 15px;
     margin: 30px;
 `

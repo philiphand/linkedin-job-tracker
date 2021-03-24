@@ -6,7 +6,8 @@ import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
 import { jobTitles, TitleShortHands } from "./Scripts/jobTitles";
 import { RouteList } from "./Components/RouteList/RouteList";
-import TechBackground from "./Images/tech.jpg"
+import TechHorizontal from "./Images/tech.jpg"
+import TechVertical from "./Images/tech_vertical.jpg"
 
 export interface Skill {
 	skillName: String;
@@ -35,6 +36,7 @@ export const App: React.FC = () => {
 	const [backEndSkills, setBackEndSkills] = useState<[[String[]]]>([[[]]])
 	const [fullStackSkills, setFullStackSkills] = useState<[[String[]]]>([[[]]])
 	const [scientistSkills, setScientistSkills] = useState<[[String[]]]>([[[]]])
+	const [combinedJobTitleSkills, setCombinedJobTitleSkills] = useState<[[[String[]]]]>([[[[]]]])
 
 
 	useEffect(() => {
@@ -79,6 +81,7 @@ export const App: React.FC = () => {
 		setAllSkillsHistory(datedResults)
 		console.log(allResults)
 
+		let allResultsArray: [[[String[]]]] = [[[[]]]]
 		jobTitles.forEach(title => {
 			let allResults: [[String[]]] = [[[]]]
 			historyDates.forEach(date => {
@@ -89,32 +92,39 @@ export const App: React.FC = () => {
 					})
 				})
 			})
-			allResults.splice(0, 1)
+			allResults.splice(0, 1) // Removes empty placeholder array
+
+			// TODO: Combine all these and look for skill patterns (which skills are often seen together)
 			if (title === TitleShortHands.devops) setDevOpsSkills(allResults)
 			if (title === TitleShortHands.frontend) setFrontEndSkills(allResults)
 			if (title === TitleShortHands.backend) setBackEndSkills(allResults)
 			if (title === TitleShortHands.fullstack) setFullStackSkills(allResults)
 			if (title === TitleShortHands.scientist) setScientistSkills(allResults)
-			// TODO: Combine all these and look for skill patterns (which skills are often seen together)
+			allResultsArray.push(allResults)
+
 			console.log(title)
 			console.log(allResults)
 		})
+		setCombinedJobTitleSkills(allResultsArray)
 	}, [])
 
 	return (
 		<Router>
 			<Header />
 			<Content>
-				<RouteList appData={{
-					allSkillsHistory,
-					topTenSkillsToday,
-					allSkillsToday,
-					devOpsSkills,
-					frontEndSkills,
-					backEndSkills,
-					fullStackSkills,
-					scientistSkills
-				}} />
+				<BackGround>
+					<RouteList appData={{
+						allSkillsHistory,
+						topTenSkillsToday,
+						allSkillsToday,
+						devOpsSkills,
+						frontEndSkills,
+						backEndSkills,
+						fullStackSkills,
+						scientistSkills,
+						combinedJobTitleSkills
+					}} />
+				</BackGround>
 			</Content>
 		</Router>
 	);
@@ -124,8 +134,23 @@ const Content = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	background-image: url(${TechBackground});
+
+`
+
+const BackGround = styled.div`
+	width: 100%;
+	background-image: url(${TechHorizontal});
 	background-repeat: no-repeat;
-	background-size: 100%;
 	background-position: center top;
+	background-size: 100%;
+	
+	@media only screen and (max-width: 1550px) {
+		background-size: 150%;
+	}
+
+	@media only screen and (max-width: 1050px) {
+		background-image: url(${TechVertical});
+		background-size: 100%;
+		background-repeat: repeat;
+	}
 `

@@ -25,8 +25,7 @@ export const MenuButton: React.FC<Props> = ({ children }) => {
 const Wrapper = styled.div<{ growHeight: string }>`
     height: 70px;
     font-size: 20px;
-    width: 10%;
-    background-color: black;
+    width: 9%;
     color: white;
     border: none;
     outline: none;
@@ -34,11 +33,15 @@ const Wrapper = styled.div<{ growHeight: string }>`
     margin: 0;
     padding: 0;
     overflow: hidden;
-
-    transition: height 0.15s ease-out;
+    box-sizing: border-box;
+    transition: height 0.25s ease-out;
+    background-color: rgba(0, 0, 0, 0);
+    
 
     &:hover {
         height: ${props => { return props.growHeight }};
+        border: 1px solid silver;
+        background-color: black;
         transition: height 0.25s ease-in;
     }
 `
