@@ -17,7 +17,7 @@ export const MenuOption: React.FC<MenuOptionProps> = ({ name, url }) => {
 
 const Name = styled.p`
     height: 70px;
-    background-color: black;
+    background-color: #218de6;
     color: white;
     text-decoration: none;
     margin: 0;
@@ -30,7 +30,6 @@ const Name = styled.p`
     &:hover {
         animation-duration: 0.25s;
         animation-name: fade;
-        color: darkred;
         text-decoration: underline;
     }
 
@@ -41,7 +40,6 @@ const Name = styled.p`
         }
 
         to {
-            color: darkred;
             text-decoration: underline;
         }
     }

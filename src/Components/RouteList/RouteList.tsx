@@ -5,8 +5,7 @@ import { About } from "../Pages/About/About";
 import { Category } from "../Pages/Categories/Category";
 import { JobTitleHome } from "../Pages/JobTitles/JobTitleHome";
 import { JobTitles } from "../Pages/JobTitles/JobTitles";
-import { TodayAll } from "../Pages/Today/TodayAll";
-import { TodayTopTen } from "../Pages/Today/TodayTopTen";
+import { SkillsToday } from "../Pages/SkillsToday/SkillsToday";
 import { History } from "../Pages/History/History";
 
 interface AppData {
@@ -46,10 +45,10 @@ export const RouteList: React.FC<Props> = ({
                 <Trending allSkillsHistory={allSkillsHistory} />
             </Route> */}
             <Route path="/today/top/10">
-                <TodayTopTen topTenSkillsToday={topTenSkillsToday} />
+                <SkillsToday skillsToday={topTenSkillsToday} title="Today's top 10" />
             </Route>
             <Route path="/today/all">
-                <TodayAll skillsToday={allSkillsToday} />
+                <SkillsToday skillsToday={allSkillsToday} title="All of today's skills" />
             </Route>
             <Route path="/categories/languages">
                 <Category allSkillsToday={allSkillsToday} categoryArray={programmingLanguages} categoryName="Programming languages" />

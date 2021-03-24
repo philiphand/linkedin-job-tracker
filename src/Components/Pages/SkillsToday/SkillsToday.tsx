@@ -1,22 +1,23 @@
 import React from "react"
 import styled from "styled-components"
-import { Skill } from "../../../App"
+import { Skill } from "../../../App";
 
 interface Props {
-    topTenSkillsToday: Skill[];
+    skillsToday: Skill[];
+    title: String;
 }
 
-export const TodayTopTen: React.FC<Props> = ({ topTenSkillsToday }) => {
+export const SkillsToday: React.FC<Props> = ({ skillsToday, title }) => {
 
     return (
         <Wrapper>
-            <Title>Today's top 10 skills in Norway</Title>
             <Content>
+                <Title>{title}</Title>
                 {
-                    topTenSkillsToday.map(skill => {
+                    skillsToday.map(skill => {
                         return (
-                            <SkillWrapper key={topTenSkillsToday.indexOf(skill)}>
-                                <SkillText>{topTenSkillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                            <SkillWrapper key={skillsToday.indexOf(skill)}>
+                                <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
                                 <SumText>{`${skill.searchResultSum} job listings`}</SumText>
                             </SkillWrapper>
                         )
@@ -36,18 +37,23 @@ const Wrapper = styled.div`
     margin-top: 10px;
 `
 
-const Title = styled.h1`
-    padding-bottom: 2px;
-    border-bottom: 3px solid black;
-    margin: 10px;
-    text-align: center;
-`
-
 const Content = styled.div`
-    width: 400px;
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 600px;
+`
+
+const Title = styled.h1`
+    padding-bottom: 2px;
+    border-bottom: 3px solid white;
+    margin: 10px;
+    text-align: center;
+    color: white;
 `
 
 const SkillWrapper = styled.div`
@@ -61,8 +67,11 @@ const SkillText = styled.p`
     font-size: 20px;
     font-weight: bold;
     margin: 5px;
+    color: white;
+    width: 300px;
 `
 
 const SumText = styled.p`
     display: inline-block;
+    color: white;
 `

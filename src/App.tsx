@@ -6,6 +6,7 @@ import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
 import { jobTitles, TitleShortHands } from "./Scripts/jobTitles";
 import { RouteList } from "./Components/RouteList/RouteList";
+import TechBackground from "./Images/tech.jpg"
 
 export interface Skill {
 	skillName: String;
@@ -120,7 +121,11 @@ export const App: React.FC = () => {
 }
 
 const Content = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-image: url(${TechBackground});
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center top;
 `
