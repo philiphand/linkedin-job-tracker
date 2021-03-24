@@ -11,17 +11,19 @@ export const TodayAll: React.FC<Props> = ({ skillsToday }) => {
     return (
         <Wrapper>
             <Title>All of today's skills in Norway</Title>
-            {
-                skillsToday.map(skill => {
-                    return (
-                        <SkillWrapper key={skillsToday.indexOf(skill)}>
-                            <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                            <SumText>{`${skill.searchResultSum} job listings`}</SumText>
-                        </SkillWrapper>
-                    )
-                })
+            <Content>
+                {
+                    skillsToday.map(skill => {
+                        return (
+                            <SkillWrapper key={skillsToday.indexOf(skill)}>
+                                <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                                <SumText>{`${skill.searchResultSum} job listings`}</SumText>
+                            </SkillWrapper>
+                        )
+                    })
 
-            }
+                }
+            </Content>
         </Wrapper>
     );
 }
@@ -29,15 +31,23 @@ export const TodayAll: React.FC<Props> = ({ skillsToday }) => {
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 400px;
+    align-items: center;
+    width: 100%;
     margin-top: 10px;
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
     padding-bottom: 2px;
-    border-bottom: 3px solid darkred;
+    border-bottom: 3px solid black;
     margin: 10px;
     text-align: center;
+`
+
+const Content = styled.div`
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `
 
 const SkillWrapper = styled.div`

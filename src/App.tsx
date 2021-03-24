@@ -28,16 +28,15 @@ export const App: React.FC = () => {
 	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
 	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
 
-	//const [jobTitleSkillGroups, setJobTitleSkillgroups] = useState<JobTitleSkillGroups>()
-	const [devOpsSkills, setDevOpsSkills] = useState<[String[]]>([[]])
-	const [frontEndSkills, setFrontEndSkills] = useState<[String[]]>([[]])
-	const [backEndSkills, setBackEndSkills] = useState<[String[]]>([[]])
-	const [fullStackSkills, setFullStackSkills] = useState<[String[]]>([[]])
-	const [scientistSkills, setScientistSkills] = useState<[String[]]>([[]])
+	// Job titles 
+	const [devOpsSkills, setDevOpsSkills] = useState<[[String[]]]>([[[]]])
+	const [frontEndSkills, setFrontEndSkills] = useState<[[String[]]]>([[[]]])
+	const [backEndSkills, setBackEndSkills] = useState<[[String[]]]>([[[]]])
+	const [fullStackSkills, setFullStackSkills] = useState<[[String[]]]>([[[]]])
+	const [scientistSkills, setScientistSkills] = useState<[[String[]]]>([[[]]])
 
 
 	useEffect(() => {
-
 		const historyDates = getHistory()
 		let allResults: any = []
 		let datedResults: [DatedResult] = [{ date: 0, content: [] }]
@@ -59,6 +58,7 @@ export const App: React.FC = () => {
 					result.forEach((entity: Skill) => {
 						if (entity.skillName === "Csharp") entity.skillName = "C#"
 						if (entity.skillName === "CICD") entity.skillName = "CI/CD"
+						if (entity.skillName === "AWS") entity.skillName = "Amazon Web Services"
 					})
 
 					datedResults.push({ date: data.date, content: result })
@@ -78,18 +78,25 @@ export const App: React.FC = () => {
 		setAllSkillsHistory(datedResults)
 		console.log(allResults)
 
-
 		jobTitles.forEach(title => {
-			fetch(api_url + "jobtitle/" + title + "/" + getYesterday()).then(res => {
-				res.json().then(data => {
-					const skills = data.keywordGroups
-					if (title === TitleShortHands.devops) setDevOpsSkills(skills)
-					if (title === TitleShortHands.frontend) setFrontEndSkills(skills)
-					if (title === TitleShortHands.backend) setBackEndSkills(skills)
-					if (title === TitleShortHands.fullstack) setFullStackSkills(skills)
-					if (title === TitleShortHands.scientist) setScientistSkills(skills)
+			let allResults: [[String[]]] = [[[]]]
+			historyDates.forEach(date => {
+				fetch(api_url + "jobtitle/" + title + "/" + date).then(res => {
+					res.json().then(data => {
+						const skills = data.keywordGroups
+						if (skills.length > 1) allResults.push(skills) // Don't add placeholder arrays
+					})
 				})
 			})
+			allResults.splice(0, 1)
+			if (title === TitleShortHands.devops) setDevOpsSkills(allResults)
+			if (title === TitleShortHands.frontend) setFrontEndSkills(allResults)
+			if (title === TitleShortHands.backend) setBackEndSkills(allResults)
+			if (title === TitleShortHands.fullstack) setFullStackSkills(allResults)
+			if (title === TitleShortHands.scientist) setScientistSkills(allResults)
+			// TODO: Combine all these and look for skill patterns (which skills are often seen together)
+			console.log(title)
+			console.log(allResults)
 		})
 	}, [])
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 interface Props {
-    jobTitleSkillGroups: [String[]]
+    jobTitleSkillGroups: [[String[]]]
     jobTitle: String;
 }
 
@@ -15,19 +15,26 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
     const [topFiveSkills, setTopFiveSkills] = useState<String[]>([])
 
-    const numberOfListings = jobTitleSkillGroups.length
+    let numberOfListings = jobTitleSkillGroups.length
+    jobTitleSkillGroups.forEach(listingsPerDay => {
+        numberOfListings += listingsPerDay.length
+    })
 
     useEffect(() => {
         let newArray: String[] = []
-        jobTitleSkillGroups.forEach((skillGroup) => {
-            skillGroup.forEach(skill => {
-                if (skill === "Csharp") skill = "C#"
-                if (skill === "CICD") skill = "CI/CD"
-                newArray.push(skill)
+        jobTitleSkillGroups.forEach((arrayOfSkillGroups) => {
+            arrayOfSkillGroups.forEach(skillGroup => {
+                skillGroup.forEach(skill => {
+                    if (skill === "Csharp") skill = "C#"
+                    if (skill === "CICD") skill = "CI/CD"
+                    if (skill === "Java ") skill = "Java"
+                    if (skill === "AWS") skill = "Amazon Web Services"
+                    newArray.push(skill)
+                })
             });
         });
 
-        var counts: any = {} // This function counts all occurences of each keyword
+        let counts: any = {} // This function counts all occurences of each keyword
         newArray.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
 
         // Re-formats keyword object
@@ -41,6 +48,7 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
         for (let i = 0; i < 5; i++) {
             countsArray[i] && topFive.push(countsArray[i].skillName)
         }
+        console.log(countsArray)
 
 
         setTopFiveSkills(topFive)
@@ -72,7 +80,7 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
                     skillCounts.map(skill => {
                         return (
                             <SkillWrapper key={skillCounts.indexOf(skill)}>
-                                <h5>{Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()}'s have experience with {skill.skillName}
+                                <h5>{Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()} positions require {skill.skillName}
                                 </h5>
                             </SkillWrapper>
                         )
@@ -114,7 +122,7 @@ const TopSkillWrapper = styled.div`
 const TopSkillNumber = styled.div`
     width: 60px;
     height: 60px;
-    background-color: green;
+    background-color: #34b800;
     font-weight: bold;
     border-radius: 100px;
     display: flex;

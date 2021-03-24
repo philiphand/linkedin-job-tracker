@@ -36,7 +36,6 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
         <Wrapper>
             <Title>History</Title>
             <SubTitle>Will eventually be a line chart</SubTitle>
-
             <HistoryWrapper>
                 {
                     topTenSkillsHistory.map(array => {
@@ -73,6 +72,9 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
 
 const Wrapper = styled.div`
     width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 `
 
 const HistoryWrapper = styled.div`
@@ -80,8 +82,9 @@ const HistoryWrapper = styled.div`
     flex-direction: column;
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
     padding-bottom: 2px;
+    border-bottom: 3px solid black;
     margin: 10px;
     text-align: center;
 `

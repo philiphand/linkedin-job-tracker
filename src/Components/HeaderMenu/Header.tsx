@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
             <MenuButton>
                 <MenuOption name="About" url="/about" />
             </MenuButton>
-            <InfoText>All stats from the Norwegian LinkedIn job board</InfoText>
+            <InfoText>All stats are scraped from the LinkedIn job board, filtered by jobs in Norway</InfoText>
             <Flag src={NorwegianFlag} />
         </Wrapper>
     );
@@ -69,8 +69,8 @@ const Flag = styled.img`
 const InfoText = styled.p`
     color: white;
     position: absolute;
-    width: 220px;
+    width: 185px;
     left: 110px;
-    margin: 15px;
+    margin: 5px;
     font-size: 14px;
 `

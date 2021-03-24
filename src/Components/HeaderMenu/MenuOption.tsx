@@ -28,7 +28,7 @@ const Name = styled.p`
     text-align: center;
 
     &:hover {
-        animation-duration: 0.4s;
+        animation-duration: 0.25s;
         animation-name: fade;
         color: darkred;
         text-decoration: underline;
