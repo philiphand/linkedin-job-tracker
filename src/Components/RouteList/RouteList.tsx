@@ -80,9 +80,9 @@ export const RouteList: React.FC<Props> = ({
             <Route path="/jobtitles/scientist">
                 <JobTitles jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
             </Route>
-            <Route path="/jobtitles">
+            {/* <Route path="/jobtitles">
                 <JobTitleHome combinedJobTitleSkills={combinedJobTitleSkills} />
-            </Route>
+            </Route> */}
             <Route path="/about/scraping">
                 <Scraping />
             </Route>

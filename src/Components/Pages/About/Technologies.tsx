@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { Transparent } from "../../Shared/shared.style";
 
 export const Technologies: React.FC = () => {
     return (
         <Wrapper>
-            <Content>
+            <Transparent>
                 <Title>Technologies used</Title>
                 <Infotext>
-                    <b>Web scraping:</b> BeautifulSoup4, Azure Functions with a 24hr trigger <br />
-                    <b>Front end:</b> React, TypeScript, Styled Components <br />
-                    <b>Back end:</b> Node.js, Express, Azure App Service<br />
+                    <b>Web scraping:</b> Python, BeautifulSoup4, Azure Time Trigger Function<br />
+                    <b>Front end:</b> React, TypeScript, Styled Components<br />
+                    <b>Back end:</b> Node.js, Express<br />
                     <b>Storage:</b> Azure Cosmos Table DB and API<br />
                     <b>Hosting:</b> Azure App Service<br />
                 </Infotext>
-            </Content>
+            </Transparent>
         </Wrapper>
     );
 }
@@ -25,18 +26,6 @@ const Wrapper = styled.div`
     width: 100%;
     padding-bottom: 800px;
 `
-
-const Content = styled.div`
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid silver;
-    border-radius: 15px;
-    padding: 10px;
-    padding-bottom: 20px;
-    margin: 30px;
-`
-
 
 const Title = styled.h1`
     padding-bottom: 2px;

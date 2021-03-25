@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { Skill } from "../../../App";
 import { extractCategoryToday } from "../../../Scripts/categoryHelper";
+import { Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsToday: Skill[];
@@ -18,7 +19,7 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
 
     return (
         <Wrapper>
-            <Content>
+            <Transparent>
                 <Title>{categoryName} in Norway</Title>
                 <SkillsWrapper>
                     {
@@ -32,7 +33,7 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
                         })
                     }
                 </SkillsWrapper>
-            </Content>
+            </Transparent>
         </Wrapper>
     );
 }
@@ -42,20 +43,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-`
-
-const Content = styled.div`
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid silver;
-    width: 400px;
-    border-radius: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 600px;
 `
 
 const Title = styled.h1`

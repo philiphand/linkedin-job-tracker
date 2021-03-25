@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
+import { Transparent } from "../../Shared/shared.style";
 import TechBackground from "./../../../Images/tech.jpg"
 
 interface Props {
@@ -50,8 +51,6 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
         for (let i = 0; i < 5; i++) {
             countsArray[i] && topFive.push(countsArray[i].skillName)
         }
-        console.log(countsArray)
-
 
         setTopFiveSkills(topFive)
         setSkillCounts(countsArray)
@@ -59,7 +58,7 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
 
     return (
         <Wrapper>
-            <Content>
+            <Transparent>
                 <Title>{jobTitle}</Title>
                 <div>
                     <TopSkillTitle>Top 5 skills</TopSkillTitle>
@@ -92,7 +91,7 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
 
                     }
                 </div>
-            </Content>
+            </Transparent>
         </Wrapper>
     );
 }
@@ -103,16 +102,6 @@ const Wrapper = styled.div`
     align-items: center;
     margin-top: 10px;
     width: 100%;
-`
-
-const Content = styled.div`
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid silver;
-    border-radius: 15px;
-    margin: 30px;
 `
 
 const Title = styled.h1`

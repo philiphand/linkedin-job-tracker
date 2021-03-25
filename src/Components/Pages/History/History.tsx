@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { DatedResult } from "../../../App";
+import { Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [DatedResult];
@@ -34,38 +35,40 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
 
     return (
         <Wrapper>
-            <Title>History</Title>
-            <SubTitle>Will eventually be a line chart</SubTitle>
-            <HistoryWrapper>
-                {
-                    topTenSkillsHistory.map(array => {
-                        let formattedDate = array.date.toString()
-                        const month = formattedDate.substring(0, 2) + "."
-                        console.log(month)
-                        const day = formattedDate.substring(2, 4) + "."
-                        console.log(day)
-                        const year = formattedDate.substring(4, 8)
-                        console.log(year)
-                        formattedDate = day + month + year
+            <Transparent>
+                <Title>History</Title>
+                <SubTitle>Will eventually be a line chart</SubTitle>
+                <HistoryWrapper>
+                    {
+                        topTenSkillsHistory.map(array => {
+                            let formattedDate = array.date.toString()
+                            const month = formattedDate.substring(0, 2) + "."
+                            console.log(month)
+                            const day = formattedDate.substring(2, 4) + "."
+                            console.log(day)
+                            const year = formattedDate.substring(4, 8)
+                            console.log(year)
+                            formattedDate = day + month + year
 
-                        return (
-                            <SkillDayWrapper key={topTenSkillsHistory.indexOf(array)}>
-                                <Date>{formattedDate}</Date>
-                                {
-                                    array.content.map(skill => {
-                                        return (
-                                            <SkillWrapper key={array.content.indexOf(skill)}>
-                                                <SkillText>{array.content.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                                                <SumText>{`${skill.searchResultSum}`}</SumText>
-                                            </SkillWrapper>
-                                        )
-                                    })
-                                }
-                            </SkillDayWrapper>
-                        )
-                    })
-                }
-            </HistoryWrapper>
+                            return (
+                                <SkillDayWrapper key={topTenSkillsHistory.indexOf(array)}>
+                                    <Date>{formattedDate}</Date>
+                                    {
+                                        array.content.map(skill => {
+                                            return (
+                                                <SkillWrapper key={array.content.indexOf(skill)}>
+                                                    <SkillText>{array.content.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                                                    <SumText>{`${skill.searchResultSum}`}</SumText>
+                                                </SkillWrapper>
+                                            )
+                                        })
+                                    }
+                                </SkillDayWrapper>
+                            )
+                        })
+                    }
+                </HistoryWrapper>
+            </Transparent>
         </Wrapper>
     );
 }

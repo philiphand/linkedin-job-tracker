@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components"
 import { Skill } from "../../../App";
+import { Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [Skill[]];
 }
 
-export const Trending: React.FC<Props> = ({ allSkillsHistory }) => {
-
+export const Trends: React.FC<Props> = ({ allSkillsHistory }) => {
 
     return (
         <Wrapper>
-            <Title>Trending skills in Norway</Title>
-            {/* {
+            <Transparent>
+                <Title>Trends in Norway</Title>
+                {/* {
                 skillsToday.map(skill => {
                     return (
                         <div key={skillsToday.indexOf(skill)}>
@@ -23,6 +24,7 @@ export const Trending: React.FC<Props> = ({ allSkillsHistory }) => {
                 })
 
             } */}
+            </Transparent>
         </Wrapper>
     );
 }
