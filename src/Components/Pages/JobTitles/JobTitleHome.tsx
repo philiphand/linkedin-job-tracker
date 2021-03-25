@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components"
-import { Transparent } from "../../Shared/shared.style";
+import { PageTitle, Transparent } from "../../Shared/shared.style";
+import { jobTitles } from "../../../Scripts/jobTitles";
+import { Link } from "react-router-dom";
 
 interface Props {
     combinedJobTitleSkills: [[[String[]]]];
@@ -8,11 +10,28 @@ interface Props {
 
 export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
 
+    function checkJobTitle(title: string) {
+        if (title === "devops") return "devops"
+        if (title === "frontend") return "frontend"
+        if (title === "backend") return "backend"
+        if (title === "fullstack") return "fullstack"
+        if (title === "scientist") return "scientist"
+        return "devops"
+    }
+
     return (
         <Wrapper>
             <Transparent>
-                <Title>All job titles</Title>
-                <p>List of all job titles</p>
+                <PageTitle>All job titles</PageTitle>
+                {
+                    jobTitles.map((title) => {
+                        return (
+                            <Link to={"/jobtitles/" + checkJobTitle(title)} style={{ cursor: "default", textDecoration: "none", color: "black" }}>
+                                <JobTitle>{title}</JobTitle>
+                            </Link>
+                        )
+                    })
+                }
             </Transparent>
         </Wrapper>
     );
@@ -26,9 +45,25 @@ const Wrapper = styled.div`
     width: 100%;
 `
 
-const Title = styled.h1`
-    padding-bottom: 2px;
-    border-bottom: 3px solid black;
-    margin: 10px;
-    text-align: center;
+const JobTitle = styled.h3`
+    color: white;
+    padding: 15px;
+    margin: 0;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+    }
+
+    @keyframes fade {
+        from {
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
+        }
+
+        to {
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
+        }
+    }
 `

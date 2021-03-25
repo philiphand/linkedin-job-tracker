@@ -32,15 +32,18 @@ const Name = styled.p`
         animation-duration: 0.25s;
         animation-name: fade;
         text-decoration: underline;
+        text-decoration-thickness: 1px;
     }
 
     @keyframes fade {
         from {
-            text-decoration: none;
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
         }
 
         to {
-            text-decoration: underline;
+            text-decoration-line: underline;
+            text-decoration-thickness: 1px;
         }
     }
 `

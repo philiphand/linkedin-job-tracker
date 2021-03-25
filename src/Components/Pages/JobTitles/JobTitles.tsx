@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { Transparent } from "../../Shared/shared.style";
-import TechBackground from "./../../../Images/tech.jpg"
 
 interface Props {
     jobTitleSkillGroups: [[String[]]]
@@ -31,7 +30,6 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
                     if (skill === "Csharp") skill = "C#"
                     if (skill === "CICD") skill = "CI/CD"
                     if (skill === "Java ") skill = "Java"
-                    if (skill === "AWS") skill = "Amazon Web Services"
                     newArray.push(skill)
                 })
             });
@@ -83,7 +81,7 @@ export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) =>
                             return (
                                 <SkillWrapper key={skillCounts.indexOf(skill)}>
                                     <h5>
-                                        {Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()} positions require {skill.skillName}
+                                        {Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()} positions involve {skill.skillName}
                                     </h5>
                                 </SkillWrapper>
                             )

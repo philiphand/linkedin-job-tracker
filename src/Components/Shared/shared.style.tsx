@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const PageTitle = styled.h1`
+    padding-bottom: 2px;
+    color: white;
+    border-bottom: 3px solid white;
+    margin: 10px;
+    text-align: center;
+`
+
 export const Transparent = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;

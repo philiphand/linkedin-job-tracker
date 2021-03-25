@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Skill } from "../../../App";
-import { NavButton } from "../../Shared/NavButton";
-import { PageNumberDisplay } from "../../Shared/PageNumberDisplay";
+import { NavButton } from "../../Shared/NavButton/NavButton";
+import { PageNumberDisplay } from "../../Shared/NavButton/PageNumberDisplay";
 import { NavButtonsWrapper, Transparent } from "../../Shared/shared.style";
 
 interface Props {
@@ -50,6 +50,7 @@ export const SkillsToday: React.FC<Props> = ({ skillsToday, title }) => {
                 <Title>{title}</Title>
                 {
                     // If placeholder value, don't render anything
+                    //tensOfSkills[pageNumber][0] && 
                     tensOfSkills[pageNumber][0].skillName !== "" && tensOfSkills[pageNumber].map(skill => {
                         return (
                             <SkillWrapper key={skillsToday.indexOf(skill)}>

@@ -1,7 +1,4 @@
-
-
-
-export const jobTitles: String[] = [
+export const jobTitles: string[] = [
     "DevOpsEngineer",
     "FrontEndDeveloper",
     "BackEndDeveloper",
@@ -9,6 +6,15 @@ export const jobTitles: String[] = [
     "DataScientist"
 ]
 
+export interface TitleObject {
+    titles: {
+        devops: "DevOpsEngineer",
+        frontend: "FrontEndDeveloper",
+        backend: "BackEndDeveloper",
+        fullstack: "FullStackDeveloper",
+        scientist: "DataScientist"
+    }
+}
 export interface JobTitleSkillGroups {
     devops: [string[]];
     frontend: [string[]];

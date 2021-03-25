@@ -79,6 +79,7 @@ export const App: React.FC = () => {
 			})
 		})
 		setAllSkillsHistory(datedResults)
+		console.log(datedResults)
 		console.log(allResults)
 
 		let allResultsArray: [[[String[]]]] = [[[[]]]]
