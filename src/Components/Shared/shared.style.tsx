@@ -8,8 +8,15 @@ export const PageTitle = styled.h1`
     text-align: center;
 `
 
+export const InfoText = styled.div`
+    color: white;
+    margin-left: 20px;
+    font-size: 18px;
+    line-height: 26px;
+`
+
 export const Transparent = styled.div`
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,4 +32,8 @@ export const Transparent = styled.div`
 export const NavButtonsWrapper = styled.div`
     margin-top: 10px;
     display: flex;
+`
+
+export const Url = styled.a`
+    color: white;
 `

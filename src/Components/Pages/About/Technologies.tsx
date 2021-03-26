@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Transparent } from "../../Shared/shared.style";
+import { Transparent, Url } from "../../Shared/shared.style";
 
 export const Technologies: React.FC = () => {
     return (
@@ -13,6 +13,8 @@ export const Technologies: React.FC = () => {
                     <b>Back end:</b> Node.js, Express, Cosmos DB Table API<br />
                     <b>Storage:</b> Cosmos Table Database<br />
                     <b>Hosting:</b> Azure App Service<br />
+                    <br />
+                    <Url href="https://github.com/philiphand/linkedin-job-tracker" target="_blank">GitHub repository</Url> (Front end only)
                 </Infotext>
             </Transparent>
         </Wrapper>

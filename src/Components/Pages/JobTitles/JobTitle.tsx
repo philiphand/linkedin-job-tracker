@@ -13,11 +13,12 @@ interface SkillCount {
 }
 
 
-export const JobTitles: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
+export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
     const [topFiveSkills, setTopFiveSkills] = useState<String[]>([])
 
     let numberOfListings = jobTitleSkillGroups.length
+
     jobTitleSkillGroups.forEach(listingsPerDay => {
         numberOfListings += listingsPerDay.length
     })

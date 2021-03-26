@@ -4,7 +4,7 @@ import { Header } from "./Components/HeaderMenu/Header";
 import { BrowserRouter as Router } from "react-router-dom";
 import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
-import { jobTitles, TitleShortHands } from "./Scripts/jobTitles";
+import { jobTitles, TitleShortHands } from "./Scripts/jobTitleHelper";
 import { RouteList } from "./Components/RouteList/RouteList";
 import TechHorizontal from "./Images/tech.jpg"
 import TechVertical from "./Images/tech_vertical.jpg"
@@ -23,12 +23,11 @@ export interface DatedResult {
 // This is where all data is fetched from the API and stored in a "global state"
 // No state management library is used, all state is simply passed as props
 // This is because the application has few "levels" and is relatively non-hierchial
-// All data is fetched once, to prevent loading times when switching pages
+// All data is fetched once, to prevent loading times and server load when switching pages
 
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
 	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
-	const [topTenSkillsToday, setTopTenSkillsToday] = useState<Skill[]>([])
 
 	// Job titles 
 	const [devOpsSkills, setDevOpsSkills] = useState<[[String[]]]>([[[]]])
@@ -44,10 +43,8 @@ export const App: React.FC = () => {
 		let allResults: any = []
 		let datedResults: [DatedResult] = [{ date: 0, content: [] }]
 
-		// WARNING
-		// This loop could become expensive as the database grows
-		// It fetches all records in the database table
-		// TODO: Try to store some of the data directly in the app repository (For example month by month)
+
+		// Fetch all keyword search results
 
 		historyDates.forEach(date => {
 
@@ -64,16 +61,12 @@ export const App: React.FC = () => {
 						if (entity.skillName === "AWS") entity.skillName = "Amazon Web Services"
 					})
 
-					datedResults.push({ date: data.date, content: result })
+					if (result.length > 0) datedResults.push({ date: data.date, content: result })
+
 					allResults.push(result)
 
 					if (date === getYesterday()) {
 						setAllSkillsToday(result) // Results from yesterday
-						let topTen = []
-						for (let i = 0; i < 10; i++) {
-							topTen.push(result[i])
-						}
-						setTopTenSkillsToday(topTen)
 					}
 				})
 			})
@@ -82,20 +75,24 @@ export const App: React.FC = () => {
 		console.log(datedResults)
 		console.log(allResults)
 
+
+		// Fetch all job title searches
+
 		let allResultsArray: [[[String[]]]] = [[[[]]]]
 		jobTitles.forEach(title => {
 			let allResults: [[String[]]] = [[[]]]
+
 			historyDates.forEach(date => {
 				fetch(api_url + "jobtitle/" + title + "/" + date).then(res => {
 					res.json().then(data => {
 						const skills = data.keywordGroups
-						if (skills.length > 1) allResults.push(skills) // Don't add placeholder arrays
+						if (skills.length > 1) allResults.push(skills) // Don't add empty placeholder arrays
 					})
 				})
 			})
 			allResults.splice(0, 1) // Removes empty placeholder array
 
-			// TODO: Combine all these and look for skill patterns (which skills are often seen together)
+
 			if (title === TitleShortHands.devops) setDevOpsSkills(allResults)
 			if (title === TitleShortHands.frontend) setFrontEndSkills(allResults)
 			if (title === TitleShortHands.backend) setBackEndSkills(allResults)
@@ -106,6 +103,7 @@ export const App: React.FC = () => {
 			console.log(title)
 			console.log(allResults)
 		})
+
 		setCombinedJobTitleSkills(allResultsArray)
 	}, [])
 
@@ -116,7 +114,6 @@ export const App: React.FC = () => {
 				<BackGround>
 					<RouteList appData={{
 						allSkillsHistory,
-						topTenSkillsToday,
 						allSkillsToday,
 						devOpsSkills,
 						frontEndSkills,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Skill } from "../../../App";
+import { divideToTens } from "../../../Scripts/divideToTens";
 import { NavButton } from "../../Shared/NavButton/NavButton";
 import { PageNumberDisplay } from "../../Shared/NavButton/PageNumberDisplay";
 import { NavButtonsWrapper, Transparent } from "../../Shared/shared.style";
@@ -23,21 +24,8 @@ export const SkillsToday: React.FC<Props> = ({ skillsToday, title }) => {
         if (skillsToday.length > 0) {
             setNumberOfPages(skillsToday.length % 10 === 0 ? skillsToday.length / 10 : Math.floor(skillsToday.length / 10) + 1)
 
-            let counter: number = 0
-            let tenSkills: [Skill] = [emptySkill]
-            let tenSkillsArray: [[Skill]] = [[emptySkill]]
-            tenSkillsArray.splice(0, 1) // Remove empty placeholder skill
-            skillsToday.forEach(skill => {
-                const index = parseInt(counter.toString()[0])
-                tenSkills[index] = skill
-                counter += 1
-                if (counter === 10 || skill === skillsToday[skillsToday.length - 1]) {
+            const tenSkillsArray = divideToTens(skillsToday)
 
-                    tenSkillsArray.push(tenSkills)
-                    counter = 0
-                    tenSkills = [emptySkill]
-                }
-            })
             console.log(tensOfSkills[0].length + numberOfPages)
             if (tensOfSkills.length !== numberOfPages) setTensOfSkills(tenSkillsArray)
             console.log(tensOfSkills)
@@ -49,9 +37,7 @@ export const SkillsToday: React.FC<Props> = ({ skillsToday, title }) => {
             <Transparent>
                 <Title>{title}</Title>
                 {
-                    // If placeholder value, don't render anything
-                    //tensOfSkills[pageNumber][0] && 
-                    tensOfSkills[pageNumber][0].skillName !== "" && tensOfSkills[pageNumber].map(skill => {
+                    tensOfSkills[pageNumber] && tensOfSkills[pageNumber].map(skill => {
                         return (
                             <SkillWrapper key={skillsToday.indexOf(skill)}>
                                 <SkillText>{skillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>

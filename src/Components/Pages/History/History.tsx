@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { DatedResult } from "../../../App";
-import { Transparent } from "../../Shared/shared.style";
+import { PageTitle, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [DatedResult];
@@ -36,8 +36,7 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
     return (
         <Wrapper>
             <Transparent>
-                <Title>History</Title>
-                <SubTitle>Will eventually be a line chart</SubTitle>
+                <PageTitle>History</PageTitle>
                 <HistoryWrapper>
                     {
                         topTenSkillsHistory.map(array => {
@@ -85,26 +84,16 @@ const HistoryWrapper = styled.div`
     flex-direction: column;
 `
 
-const Title = styled.h1`
-    padding-bottom: 2px;
-    border-bottom: 3px solid black;
-    margin: 10px;
-    text-align: center;
-`
-
-const SubTitle = styled.h3`
-    text-align: center;
-`
-
 const Date = styled.p`
     margin-left: 10px;
+    color: white;
 `
 
 const SkillDayWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: left;
-    border: 1px solid black;
+    border: 1px solid white;
 `
 
 const SkillWrapper = styled.div`
@@ -118,8 +107,10 @@ const SkillText = styled.p`
     font-size: 18px;
     font-weight: bold;
     margin: 5px;
+    color: white;
 `
 
 const SumText = styled.p`
     display: inline-block;
+    color: white;
 `

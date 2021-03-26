@@ -41,7 +41,7 @@ export const libraries = [
 ]
 
 export const other = [
-    "AI",
+    "Artificial intelligence",
     "Machine learning",
     "CI/CD",
     "REST",

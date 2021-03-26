@@ -4,14 +4,14 @@ import { programmingLanguages, libraries, software, other } from "../../Scripts/
 import { Technologies } from "../Pages/About/Technologies";
 import { Category } from "../Pages/Categories/Category";
 import { JobTitleHome } from "../Pages/JobTitles/JobTitleHome";
-import { JobTitles } from "../Pages/JobTitles/JobTitles";
+import { JobTitle } from "../Pages/JobTitles/JobTitle";
 import { SkillsToday } from "../Pages/SkillsToday/SkillsToday";
 import { History } from "../Pages/History/History";
 import { Scraping } from "../Pages/About/Scraping";
+import { Home } from "../Pages/Home/Home";
 
 interface AppData {
     allSkillsHistory: any;
-    topTenSkillsToday: any;
     allSkillsToday: any;
     devOpsSkills: any;
     frontEndSkills: any;
@@ -29,7 +29,6 @@ interface Props {
 export const RouteList: React.FC<Props> = ({
     appData: {
         allSkillsHistory,
-        topTenSkillsToday,
         allSkillsToday,
         devOpsSkills,
         frontEndSkills,
@@ -47,9 +46,6 @@ export const RouteList: React.FC<Props> = ({
             {/* <Route path="/trending">
                 <Trending allSkillsHistory={allSkillsHistory} />
             </Route> */}
-            <Route path="/today/top/10">
-                <SkillsToday skillsToday={topTenSkillsToday} title="Today's top 10" />
-            </Route>
             <Route path="/today/all">
                 <SkillsToday skillsToday={allSkillsToday} title="All of today's skills" />
             </Route>
@@ -66,19 +62,19 @@ export const RouteList: React.FC<Props> = ({
                 <Category allSkillsToday={allSkillsToday} categoryArray={other} categoryName="Other keywords" />
             </Route>
             <Route path="/jobtitles/devops">
-                <JobTitles jobTitleSkillGroups={devOpsSkills} jobTitle="DevOps Engineer" />
+                <JobTitle jobTitleSkillGroups={devOpsSkills} jobTitle="DevOps Engineer" />
             </Route>
             <Route path="/jobtitles/frontend">
-                <JobTitles jobTitleSkillGroups={frontEndSkills} jobTitle="Front End Developer" />
+                <JobTitle jobTitleSkillGroups={frontEndSkills} jobTitle="Front End Developer" />
             </Route>
             <Route path="/jobtitles/backend">
-                <JobTitles jobTitleSkillGroups={backEndSkills} jobTitle="Back End Developer" />
+                <JobTitle jobTitleSkillGroups={backEndSkills} jobTitle="Back End Developer" />
             </Route>
             <Route path="/jobtitles/fullstack">
-                <JobTitles jobTitleSkillGroups={fullStackSkills} jobTitle="Full Stack Developer" />
+                <JobTitle jobTitleSkillGroups={fullStackSkills} jobTitle="Full Stack Developer" />
             </Route>
             <Route path="/jobtitles/scientist">
-                <JobTitles jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
+                <JobTitle jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
             </Route>
             <Route path="/jobtitles">
                 <JobTitleHome combinedJobTitleSkills={combinedJobTitleSkills} />
@@ -88,6 +84,9 @@ export const RouteList: React.FC<Props> = ({
             </Route>
             <Route path="/about/technologies">
                 <Technologies />
+            </Route>
+            <Route path="/">
+                <Home />
             </Route>
         </Switch>
     );

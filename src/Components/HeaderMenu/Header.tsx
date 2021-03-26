@@ -3,24 +3,21 @@ import styled from "styled-components"
 import { MenuButton } from "./MenuButton";
 import { MenuOption } from "./MenuOption";
 import NorwegianFlag from "./../../Images/Flag_of_Norway.png";
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
     return (
         <Wrapper>
-            <InfoText>All stats are scraped from the LinkedIn job board, filtered by jobs in Norway</InfoText>
+            <InfoText>Norwegian data only</InfoText>
             <Flag src={NorwegianFlag} />
             <MenuButton>
                 <MenuOption name="History" url="/history/chart" />
                 <MenuOption name="Chart" url="/history/chart" />
-                <MenuOption name="Table" url="/history/table" />
+                <MenuOption name="Trends" url="/history/trends" />
             </MenuButton>
-            {/* <MenuButton>
-                <MenuOption name="Trending" url="/trending" />
-            </MenuButton> */}
             <MenuButton>
-                <MenuOption name="Today" url="/today/top/10" />
-                <MenuOption name="Top 10" url="/today/top/10" />
-                <MenuOption name="All" url="/today/all" />
+                <MenuOption name="All skills" url="/today/all" />
+                <MenuOption name="Today" url="/today/all" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Job titles" url="/jobtitles" />
@@ -38,13 +35,15 @@ export const Header: React.FC = () => {
                 <MenuOption name="Other" url="/categories/other" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="About" url="/about/search" />
+                <MenuOption name="About" url="/" />
                 <MenuOption name="Scraping method" url="/about/scraping" />
                 <MenuOption name="Technologies" url="/about/technologies" />
             </MenuButton>
-            <HomeButton onClick={() => window.location.replace("/")} stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="2.5em" width="2.5em" xmlns="http://www.w3.org/2000/svg">
-                <path d="M256 19.27L25.637 249.638 19.27 256 32 268.73l6.363-6.367L256 44.727l217.637 217.636L480 268.73 492.73 256l-6.367-6.363zM96 48v107.273l64-64.002V48zm160 20.727l-192 192V486h64V320h96v166h224V260.727zM288 320h96v80h-96z"></path>
-            </HomeButton>
+            <Link to="/">
+                <HomeButton stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="2.5em" width="2.5em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M256 19.27L25.637 249.638 19.27 256 32 268.73l6.363-6.367L256 44.727l217.637 217.636L480 268.73 492.73 256l-6.367-6.363zM96 48v107.273l64-64.002V48zm160 20.727l-192 192V486h64V320h96v166h224V260.727zM288 320h96v80h-96z"></path>
+                </HomeButton>
+            </Link>
         </Wrapper>
     );
 }
@@ -71,17 +70,18 @@ const HomeButton = styled.svg`
 
 const Flag = styled.img`
     position: absolute;
-    height: 50px;
+    height: 40px;
     width: auto;
     left: 20px;
-    margin: 10px;
+    margin: 15px;
 `
 
 const InfoText = styled.p`
     color: white;
     position: absolute;
-    width: 185px;
-    left: 110px;
-    margin: 5px;
+    font-weight: bold;
+    width: 70px;
+    left: 90px;
+    margin: 15px;
     font-size: 14px;
 `

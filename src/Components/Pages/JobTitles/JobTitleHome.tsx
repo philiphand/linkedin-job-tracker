@@ -1,23 +1,20 @@
 import React from "react";
 import styled from "styled-components"
 import { PageTitle, Transparent } from "../../Shared/shared.style";
-import { jobTitles } from "../../../Scripts/jobTitles";
+import { checkIfJobTitle, jobTitles } from "../../../Scripts/jobTitleHelper";
 import { Link } from "react-router-dom";
 
 interface Props {
     combinedJobTitleSkills: [[[String[]]]];
 }
 
+function separateUppercases(title: string) {
+    return title.replace(/([A-Z])/g, ' $1').trim()
+}
+
 export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
 
-    function checkJobTitle(title: string) {
-        if (title === "devops") return "devops"
-        if (title === "frontend") return "frontend"
-        if (title === "backend") return "backend"
-        if (title === "fullstack") return "fullstack"
-        if (title === "scientist") return "scientist"
-        return "devops"
-    }
+    console.log(combinedJobTitleSkills)
 
     return (
         <Wrapper>
@@ -26,9 +23,10 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                 {
                     jobTitles.map((title) => {
                         return (
-                            <Link to={"/jobtitles/" + checkJobTitle(title)} style={{ cursor: "default", textDecoration: "none", color: "black" }}>
-                                <JobTitle>{title}</JobTitle>
-                            </Link>
+                            <StyledLink key={jobTitles.indexOf(title)} to={"/jobtitles/" + checkIfJobTitle(title)}>
+
+                                <JobTitle>{separateUppercases(title)}</JobTitle>
+                            </StyledLink>
                         )
                     })
                 }
@@ -49,6 +47,7 @@ const JobTitle = styled.h3`
     color: white;
     padding: 15px;
     margin: 0;
+    text-decoration: none;
 
     &:hover {
         text-decoration: underline;
@@ -66,4 +65,9 @@ const JobTitle = styled.h3`
             text-decoration-thickness: 1px;
         }
     }
+`
+
+const StyledLink = styled(Link)`
+    cursor: "default";
+    text-decoration: none;
 `
