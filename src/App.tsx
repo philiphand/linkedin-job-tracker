@@ -58,7 +58,6 @@ export const App: React.FC = () => {
 					result.forEach((entity: Skill) => {
 						if (entity.skillName === "Csharp") entity.skillName = "C#"
 						if (entity.skillName === "CICD") entity.skillName = "CI/CD"
-						if (entity.skillName === "AWS") entity.skillName = "Amazon Web Services"
 					})
 
 					if (result.length > 0) datedResults.push({ date: data.date, content: result })
@@ -72,8 +71,6 @@ export const App: React.FC = () => {
 			})
 		})
 		setAllSkillsHistory(datedResults)
-		console.log(datedResults)
-		console.log(allResults)
 
 
 		// Fetch all job title searches
@@ -99,9 +96,6 @@ export const App: React.FC = () => {
 			if (title === TitleShortHands.fullstack) setFullStackSkills(allResults)
 			if (title === TitleShortHands.scientist) setScientistSkills(allResults)
 			allResultsArray.push(allResults)
-
-			console.log(title)
-			console.log(allResults)
 		})
 
 		setCombinedJobTitleSkills(allResultsArray)

@@ -8,6 +8,12 @@ export const PageTitle = styled.h1`
     text-align: center;
 `
 
+export const Description = styled.p`
+    font-size: 16px;
+    color: white;
+    margin: 10px;
+`
+
 export const InfoText = styled.div`
     color: white;
     margin-left: 20px;
@@ -22,11 +28,14 @@ export const Transparent = styled.div`
     align-items: center;
     border: 1px solid silver;
     border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 600px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px;
+    margin-bottom: 500px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
     margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
 `
 
 export const NavButtonsWrapper = styled.div`
@@ -36,4 +45,25 @@ export const NavButtonsWrapper = styled.div`
 
 export const Url = styled.a`
     color: white;
+`
+
+// SkillsToday and Category
+
+export const SkillText = styled.p`
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+    color: white;
+    width: 300px;
+
+    @media only screen and (max-width: 480px) {
+        width: 180px;
+    }
+`
+
+export const SumText = styled.p`
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    margin: 10px;
 `

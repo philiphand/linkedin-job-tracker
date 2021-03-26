@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { Transparent } from "../../Shared/shared.style";
+import { SkillText, SumText, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     jobTitleSkillGroups: [[String[]]]
@@ -12,6 +12,8 @@ interface SkillCount {
     count: number;
 }
 
+// Dynamic component for any job title
+// jobTitleSkillGroup contains the history of all skillGroups for the specific job title
 
 export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
@@ -76,20 +78,40 @@ export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => 
                         }
                     </TopSkillsWrapper>
                 </div>
-                <div>
-                    {
-                        skillCounts.map(skill => {
-                            return (
-                                <SkillWrapper key={skillCounts.indexOf(skill)}>
-                                    <h5>
-                                        {Math.round(skill.count / numberOfListings * 100)}% of {jobTitle.toLowerCase()} positions involve {skill.skillName}
-                                    </h5>
-                                </SkillWrapper>
-                            )
-                        })
-
-                    }
-                </div>
+                <SkillTableWrapper>
+                    <div>
+                        {
+                            skillCounts.map(skill => {
+                                const index = skillCounts.indexOf(skill)
+                                if (index < 10) {
+                                    return (
+                                        <SkillWrapper key={skillCounts.indexOf(skill)}>
+                                            <SkillText>{skill.skillName}</SkillText>
+                                            {Math.round(skill.count / numberOfListings * 100)}% of job postings
+                                        </SkillWrapper>
+                                    )
+                                }
+                                return true
+                            })
+                        }
+                    </div>
+                    <div>
+                        {
+                            skillCounts.map(skill => {
+                                const index = skillCounts.indexOf(skill)
+                                if (index > 10 && index < 21) {
+                                    return (
+                                        <SkillWrapper key={skillCounts.indexOf(skill)}>
+                                            <SkillText>{skill.skillName}</SkillText>
+                                            {Math.round(skill.count / numberOfListings * 100)}% of job postings
+                                        </SkillWrapper>
+                                    )
+                                }
+                                return true
+                            })
+                        }
+                    </div>
+                </SkillTableWrapper>
             </Transparent>
         </Wrapper>
     );
@@ -144,6 +166,15 @@ const TopSkillNumber = styled.div`
     margin-left: 80px;
 `
 
+const SkillTableWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    @media only screen and (max-width: 1250px) {
+        flex-direction: column;
+    }
+`
+
 const TopSkillText = styled.div`
     font-size: 20px;
     font-weight: bold;
@@ -156,6 +187,7 @@ const SkillWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 500px;
+    max-width: 480px;
     color: white;
+    margin: 10px;
 `

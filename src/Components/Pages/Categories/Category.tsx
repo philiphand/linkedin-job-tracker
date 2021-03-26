@@ -4,7 +4,7 @@ import { Skill } from "../../../App";
 import { divideToTens } from "../../../Scripts/divideToTens";
 import { NavButton } from "../../Shared/NavButton/NavButton";
 import { PageNumberDisplay } from "../../Shared/NavButton/PageNumberDisplay";
-import { NavButtonsWrapper, Transparent } from "../../Shared/shared.style";
+import { Description, NavButtonsWrapper, SkillText, SumText, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsToday: [Skill];
@@ -50,17 +50,18 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
         <Wrapper>
             <Transparent>
                 <Title>{categoryName} in Norway</Title>
+                <Description>
+                    Number of job postings for each keyword searched
+                </Description>
                 <SkillsWrapper>
                     {
                         // Wait for categorySkillsToday to change before attempting to re-render (or else the component won't re-render at all)
                         categorySkillsToday.indexOf(tensOfSkills[0][0]) !== -1 &&
                         tensOfSkills[pageNumber].map(skill => {
-                            console.log(skill)
-                            console.log(categorySkillsToday.indexOf(skill))
                             return (
                                 <SkillWrapper key={categorySkillsToday.indexOf(skill)}>
                                     <SkillText>{categorySkillsToday.indexOf(skill) + 1}. {skill.skillName}</SkillText>
-                                    <SumText>{`${skill.searchResultSum} job listings`}</SumText>
+                                    <SumText>{`${skill.searchResultSum}`}</SumText>
                                 </SkillWrapper>
                             )
                         })
@@ -105,16 +106,4 @@ const SkillWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 350px;
-`
-
-const SkillText = styled.p`
-    font-size: 20px;
-    font-weight: bold;
-    margin: 5px;
-    color: white;
-`
-
-const SumText = styled.p`
-    display: inline-block;
-    color: white;
 `

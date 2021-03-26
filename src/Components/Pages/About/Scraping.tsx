@@ -8,11 +8,10 @@ export const Scraping: React.FC = () => {
             <Transparent>
                 <Title>Web scraping method</Title>
                 <Infotext>
-
                     All data is scraped from the Linkedin job board, with only one filter enabled, which is location set to Norway.<br />
                     Please keep in mind that the search accuracy has a certain margin of error. <br />
-                    This is due to various reasons like duplicate job listings, multiple spellings of keywords and small sample sizes. <br />
-                    The first search and insertion to the database was completed on 24.03.2021. <br />
+                    This is due to various reasons like duplicate job listings, multiple spellings of keywords, small sample sizes and more.<br />
+                    The first search and insertion to the database was executed on 24.03.2021. <br />
                     As more time passes, the sample size will grow and increase the accuracy of the data displayed.<br />
                     More features and search solutions will also be developed over time.
                 </Infotext>

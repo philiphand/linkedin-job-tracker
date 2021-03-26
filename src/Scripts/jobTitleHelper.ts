@@ -1,12 +1,36 @@
+import { Skill } from "../App"
 
 export function checkIfJobTitle(title: string) {
-    console.log(title)
     if (title === "devops" || "DevopsEngineer") return "devops"
     if (title === "frontend" || "FrontEndEngineer") return "frontend"
     if (title === "backend" || "BackEndEngineer") return "backend"
     if (title === "fullstack" || "FullStackEngineer") return "fullstack"
     if (title === "scientist" || "DataScientist") return "scientist"
     return ""
+}
+
+export interface SkillCount {
+    skillName: String;
+    count: number;
+}
+
+export function countSingleSkills(skills: String[]) {
+    let counts: any = {} // This function counts all occurences of each keyword
+    skills.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
+
+    // Re-formats keyword object
+    let countsArray: SkillCount[] = []
+    for (const property in counts) {
+        countsArray.push({ skillName: property, count: counts[property] })
+    }
+    countsArray.sort((a, b) => b.count - a.count);
+
+    // let topFive = []
+    // for (let i = 0; i < 5; i++) {
+    //     countsArray[i] && topFive.push(countsArray[i].skillName)
+    // }
+
+    return countsArray
 }
 
 export const jobTitles: string[] = [
