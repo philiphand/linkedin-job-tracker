@@ -1,11 +1,11 @@
 import { Skill } from "../App"
 
 export function checkIfJobTitle(title: string) {
-    if (title === "devops" || "DevopsEngineer") return "devops"
-    if (title === "frontend" || "FrontEndEngineer") return "frontend"
-    if (title === "backend" || "BackEndEngineer") return "backend"
-    if (title === "fullstack" || "FullStackEngineer") return "fullstack"
-    if (title === "scientist" || "DataScientist") return "scientist"
+    if (title === "devops" || title === "DevOpsEngineer") return "devops"
+    if (title === "frontend" || title === "FrontEndDeveloper") return "frontend"
+    if (title === "backend" || title === "BackEndDeveloper") return "backend"
+    if (title === "fullstack" || title === "FullStackDeveloper") return "fullstack"
+    if (title === "scientist" || title === "DataScientist") return "scientist"
     return ""
 }
 

@@ -66,6 +66,10 @@ const HomeButton = styled.svg`
         cursor: pointer;
         opacity: 0.5;
     }
+
+    @media only screen and (max-width: 1000px) {
+		opacity: 0;
+	}
 `
 
 const Flag = styled.img`
@@ -74,6 +78,10 @@ const Flag = styled.img`
     width: auto;
     left: 20px;
     margin: 15px;
+
+    @media only screen and (max-width: 1000px) {
+		opacity: 0;
+	}
 `
 
 const InfoText = styled.p`
@@ -84,4 +92,8 @@ const InfoText = styled.p`
     left: 90px;
     margin: 15px;
     font-size: 14px;
+
+    @media only screen and (max-width: 1150px) {
+		opacity: 0;
+	}
 `

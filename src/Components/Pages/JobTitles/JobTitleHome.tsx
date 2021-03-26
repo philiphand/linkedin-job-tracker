@@ -9,6 +9,7 @@ interface Props {
 }
 
 function separateUppercases(title: string) {
+
     return title.replace(/([A-Z])/g, ' $1').trim()
 }
 
@@ -33,7 +34,6 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
     })
 
     const countedSkills = countSingleSkills(singleSkillsCombined)
-    console.log(countedSkills)
 
     let topSkills: SkillCount[] = []
     countedSkills.forEach(skill => {
@@ -56,7 +56,7 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                     }
                 </JobTitlesWrapper>
                 <UnderTitle>Combined analysis</UnderTitle>
-                <Description>Percentage of job listings where the specific keyword was found</Description>
+                <Description>Percentage of job listings where the specified keywords were found (from all five job titles combined)</Description>
                 <TopSkillsWrapper>
                     {
                         topSkills.map(skill => {
@@ -140,6 +140,8 @@ const StyledLink = styled(Link)`
 const JobTitlesWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     border: 1px solid silver;
     border-radius: 15px;
     margin: 10px;

@@ -49,7 +49,7 @@ export const Category: React.FC<Props> = ({ allSkillsToday, categoryArray, categ
     return (
         <Wrapper>
             <Transparent>
-                <Title>{categoryName} in Norway</Title>
+                <Title>{categoryName}</Title>
                 <Description>
                     Number of job postings for each keyword searched
                 </Description>
