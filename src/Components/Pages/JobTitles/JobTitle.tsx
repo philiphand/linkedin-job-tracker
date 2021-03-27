@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { SkillText, SumText, Transparent } from "../../Shared/shared.style";
+import { Description, SkillText, SumText, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     jobTitleSkillGroups: [[String[]]]
@@ -17,7 +17,6 @@ interface SkillCount {
 
 export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
-    const [topFiveSkills, setTopFiveSkills] = useState<String[]>([])
 
     let numberOfListings = jobTitleSkillGroups.length
 
@@ -38,7 +37,7 @@ export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => 
             });
         });
 
-        let counts: any = {} // This function counts all occurences of each keyword
+        let counts: any = {} // This function counts all occurences of each keyword and adds them together
         newArray.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
 
         // Re-formats keyword object
@@ -48,69 +47,29 @@ export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => 
         }
         countsArray.sort((a, b) => b.count - a.count);
 
-        let topFive = []
-        for (let i = 0; i < 5; i++) {
-            countsArray[i] && topFive.push(countsArray[i].skillName)
-        }
-
-        setTopFiveSkills(topFive)
         setSkillCounts(countsArray)
     }, [jobTitleSkillGroups])
 
     return (
         <Wrapper>
             <Transparent>
-                <Title>{jobTitle}</Title>
-                <div>
-                    <TopSkillTitle>Top 5 skills</TopSkillTitle>
-                    <TopSkillsWrapper>
-                        {
-                            topFiveSkills.map(skillName => {
-                                const index = topFiveSkills.indexOf(skillName) + 1
-                                return (
-
-                                    <TopSkillWrapper key={index}>
-                                        <TopSkillNumber>{index}</TopSkillNumber>
-                                        <TopSkillText>{skillName}</TopSkillText>
-                                    </TopSkillWrapper>
-                                )
-                            })
-                        }
-                    </TopSkillsWrapper>
-                </div>
                 <SkillTableWrapper>
-                    <div>
-                        {
-                            skillCounts.map(skill => {
-                                const index = skillCounts.indexOf(skill)
-                                if (index < 10) {
-                                    return (
-                                        <SkillWrapper key={skillCounts.indexOf(skill)}>
-                                            <SkillText>{skill.skillName}</SkillText>
-                                            {Math.round(skill.count / numberOfListings * 100)}% of job postings
-                                        </SkillWrapper>
-                                    )
-                                }
-                                return true
-                            })
-                        }
-                    </div>
-                    <div>
-                        {
-                            skillCounts.map(skill => {
-                                const index = skillCounts.indexOf(skill)
-                                if (index > 10 && index < 21) {
-                                    return (
-                                        <SkillWrapper key={skillCounts.indexOf(skill)}>
-                                            <SkillText>{skill.skillName}</SkillText>
-                                            {Math.round(skill.count / numberOfListings * 100)}% of job postings
-                                        </SkillWrapper>
-                                    )
-                                }
-                                return true
-                            })
-                        }
-                    </div>
+                    <Title>{jobTitle}</Title>
+                    <Description>Percentage of job postings where the specified keywords were found when searching for {jobTitle}</Description>
+                    {
+                        skillCounts.map(skill => {
+                            const index = skillCounts.indexOf(skill)
+                            if (index < 26) {
+                                return (
+                                    <SkillWrapper key={skillCounts.indexOf(skill)}>
+                                        <SkillText>{skill.skillName}</SkillText>
+                                        {Math.round(skill.count / numberOfListings * 100)}%
+                                    </SkillWrapper>
+                                )
+                            }
+                            return true
+                        })
+                    }
                 </SkillTableWrapper>
             </Transparent>
         </Wrapper>
@@ -133,61 +92,24 @@ const Title = styled.h1`
     color: white;
 `
 
-const TopSkillTitle = styled.h2`
-    text-align: center;
-    font-size: 30px;
-    color: white;
-`
-
-const TopSkillsWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 80px;
-`
-
-const TopSkillWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
-`
-
-const TopSkillNumber = styled.div`
-    width: 60px;
-    height: 60px;
-    background-color: #34b800;
-    font-weight: bold;
-    border-radius: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    margin-left: 80px;
-`
-
-const SkillTableWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    @media only screen and (max-width: 1250px) {
-        flex-direction: column;
-    }
-`
-
-const TopSkillText = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 5px;
-    color: white;
-`
-
 const SkillWrapper = styled.div`
     border-bottom: 1px solid gray;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 480px;
     color: white;
-    margin: 10px;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    width: 300px;
+`
+
+const SkillTableWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+    padding-bottom: 20px;
 `

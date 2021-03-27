@@ -56,7 +56,7 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                     }
                 </JobTitlesWrapper>
                 <UnderTitle>Combined analysis</UnderTitle>
-                <Description>Percentage of job listings where the specified keywords were found (from all five job titles combined)</Description>
+                <Description>Percentage of job postings where the specified keywords were found (from search results of all job titles combined)</Description>
                 <TopSkillsWrapper>
                     {
                         topSkills.map(skill => {
@@ -97,7 +97,7 @@ const TopSkillsWrapper = styled.div`
     max-width: 800px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     border: 1px solid silver;
     border-radius: 15px;
     padding-left: 30px;
@@ -128,7 +128,7 @@ const SkillName = styled.p`
     color: white; 
     font-size: 20px;
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 10px;
     font-weight: bold;
 `
 
