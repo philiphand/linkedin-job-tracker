@@ -47,7 +47,6 @@ const WhiteLink = styled.a`
     text-decoration: none;
 
     &:hover {
-        opacity: 0.5;
         text-decoration: underline;
     }
 `

@@ -13,8 +13,6 @@ export const Technologies: React.FC = () => {
                     <b>Back end:</b> Node.js, Express, Cosmos DB Table API<br />
                     <b>Storage:</b> Cosmos Table Database<br />
                     <b>Hosting:</b> Azure App Service<br />
-                    <br />
-                    <Url href="https://github.com/philiphand/linkedin-job-tracker" target="_blank" rel="noreferrer">GitHub repository</Url> (Front end only)
                 </Infotext>
             </Transparent>
         </Wrapper>

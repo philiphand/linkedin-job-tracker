@@ -109,6 +109,10 @@ const TopSkillWrapper = styled.div`
     color: white;
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: 650px) {
+		height: 60px;
+	}
 `
 
 const Percentage = styled.p`

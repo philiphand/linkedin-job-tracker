@@ -8,13 +8,13 @@ export const Home: React.FC = () => {
     return (
         <Wrapper>
             <Transparent>
-                <PageTitle>Welcome to LinkedIn-demand.net</PageTitle>
-                <UnderTitle>An overview of Norway's most in-demand tech skills</UnderTitle>
-                <InfoText>Made specifically for job seekers in the tech business.</InfoText>
-                <InfoText>Here you can find what tech skills are currently in high demand, updated daily!</InfoText>
-                <InfoText>All data is from <InvisibleLink href="https://www.linkedin.com/feed/" target="_blank" rel="noreferrer">LinkedIn.com</InvisibleLink>, updated daily!</InfoText>
+                <PageTitle>Welcome</PageTitle>
+                <UnderTitle>This page is an overview of Norway's most in-demand tech skills</UnderTitle>
+                <InfoText>It was created to get a better understanding of the software and information technology job market.</InfoText>
+                <InfoText>It is especially useful for programmers wondering what technologies to learn next.</InfoText>
+                <InfoText>All data is from the <InvisibleLink href="https://www.linkedin.com/feed/" target="_blank" rel="noreferrer">LinkedIn job board</InvisibleLink>, and the website is updated daily.</InfoText>
                 <br />
-                <InfoText><b>NB: This page is still in early development, more and improved features are coming.</b></InfoText>
+                <InfoText><b>This page is still in development, more and improved features are on the way.</b></InfoText>
             </Transparent>
         </Wrapper>
     );

@@ -6,8 +6,8 @@ import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
 import { jobTitles, TitleShortHands } from "./Scripts/jobTitleHelper";
 import { RouteList } from "./Components/RouteList/RouteList";
-import TechHorizontal from "./Images/wormhole.jpg"
-import TechVertical from "./Images/wormhole_vertical.jpg"
+import TechHorizontal from "./Images/network2.jpg"
+import TechVertical from "./Images/network2_swap.jpg"
 import { Footer } from "./Components/Footer/Footer";
 
 export interface Skill {
@@ -23,8 +23,12 @@ export interface DatedResult {
 // Main component
 // This is where all data is fetched from the API and stored in a "global state"
 // No state management library is used, all state is simply passed as props
-// This is because the application has few "levels" and is relatively non-hierchial
+// This is because the application has at maximum 3 levels, 
+// i.e. all components are at most 2 prop drills away from eachother
 // All data is fetched once, to prevent loading times and server load when switching pages
+
+
+// TODO: Move most of the data processing to the API instead
 
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
@@ -72,6 +76,7 @@ export const App: React.FC = () => {
 			})
 		})
 		setAllSkillsHistory(datedResults)
+		console.log(datedResults)
 
 
 		// Fetch all job title searches
