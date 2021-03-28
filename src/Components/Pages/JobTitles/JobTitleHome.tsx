@@ -55,7 +55,7 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                         })
                     }
                 </JobTitlesWrapper>
-                <UnderTitle>Combined analysis</UnderTitle>
+                <UnderTitle>Combined percentages</UnderTitle>
                 <Description>Percentage of job postings where the specified keywords were found (from search results of all job titles combined)</Description>
                 <TopSkillsWrapper>
                     {
@@ -73,7 +73,7 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                         })
                     }
                 </TopSkillsWrapper>
-                <Description>Based on {singleSkillsCombined.length} keyword occurences throughout {numberOfPostings} job postings</Description>
+                <Description>Based on {singleSkillsCombined.length} keyword occurences throughout {numberOfPostings} job postings (and counting)</Description>
             </Transparent>
         </Wrapper>
     );

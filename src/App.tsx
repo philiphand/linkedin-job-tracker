@@ -16,7 +16,7 @@ export interface Skill {
 }
 
 export interface DatedResult {
-	date: number;
+	date: string;
 	content: Skill[];
 }
 
@@ -31,7 +31,7 @@ export interface DatedResult {
 // TODO: Move most of the data processing to the API instead
 
 export const App: React.FC = () => {
-	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
+	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", content: [] }])
 	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
 
 	// Job titles 
@@ -46,7 +46,7 @@ export const App: React.FC = () => {
 	useEffect(() => {
 		const historyDates = getHistory()
 		let allResults: any = []
-		let datedResults: [DatedResult] = [{ date: 0, content: [] }]
+		let datedResults: [DatedResult] = [{ date: "", content: [] }]
 
 
 		// Fetch all keyword search results

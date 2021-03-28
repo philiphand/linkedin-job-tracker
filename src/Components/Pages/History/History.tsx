@@ -8,11 +8,11 @@ interface Props {
 }
 
 export const History: React.FC<Props> = ({ allSkillsHistory }) => {
-    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
+    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", content: [] }])
 
     useEffect(() => {
 
-        let topTenHistory: [DatedResult] = [{ date: 0, content: [] }]
+        let topTenHistory: [DatedResult] = [{ date: "", content: [] }]
         allSkillsHistory.forEach(allSkillsDay => {
 
             let counter = 0
@@ -23,10 +23,18 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
             })
             counter = 0
 
+
             topTenHistory.push(topTenDay)
         })
 
         topTenHistory.splice(0, 2) // Removes inital placeholder values
+
+        console.log(topTenHistory)
+        let sortedTopTenHistory = topTenHistory.sort((a: { date: string; }, b: { date: string; }) => parseFloat(b.date) - parseFloat(a.date));
+        console.log(sortedTopTenHistory)
+
+        //topTenHistory
+
         setTopTenSkillsHistory(topTenHistory)
     }, [allSkillsHistory])
 
@@ -42,11 +50,8 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
                         topTenSkillsHistory.map(array => {
                             let formattedDate = array.date.toString()
                             const month = formattedDate.substring(0, 2) + "."
-                            console.log(month)
                             const day = formattedDate.substring(2, 4) + "."
-                            console.log(day)
                             const year = formattedDate.substring(4, 8)
-                            console.log(year)
                             formattedDate = day + month + year
 
                             return (
@@ -81,7 +86,7 @@ const Wrapper = styled.div`
 
 const HistoryWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 `
 
 const Date = styled.p`
@@ -91,9 +96,11 @@ const Date = styled.p`
 
 const SkillDayWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: left;
     border: 1px solid white;
+    padding-left: 10px;
+    padding-right: 10px;
 `
 
 const SkillWrapper = styled.div`

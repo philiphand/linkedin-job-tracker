@@ -8,11 +8,11 @@ interface Props {
 }
 
 export const Chart: React.FC<Props> = ({ allSkillsHistory }) => {
-    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: 0, content: [] }])
+    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", content: [] }])
 
     useEffect(() => {
 
-        let topTenHistory: [DatedResult] = [{ date: 0, content: [] }]
+        let topTenHistory: [DatedResult] = [{ date: "", content: [] }]
         allSkillsHistory.forEach(allSkillsDay => {
 
             let counter = 0
