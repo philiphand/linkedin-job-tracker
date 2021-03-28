@@ -9,12 +9,10 @@ export const Home: React.FC = () => {
         <Wrapper>
             <Transparent>
                 <PageTitle>Welcome to LinkedIn-demand.net</PageTitle>
-                <UnderTitle>The place for Norway's most in-demand tech skills</UnderTitle>
-                <InfoText>A tool made specifically for job seekers in the tech business.</InfoText>
+                <UnderTitle>An overview of Norway's most in-demand tech skills</UnderTitle>
+                <InfoText>Made specifically for job seekers in the tech business.</InfoText>
                 <InfoText>Here you can find what tech skills are currently in high demand, updated daily!</InfoText>
-                {/* <InfoText>Are you working towards a specific career path? Perhaps you will find the job title section useful.</InfoText>
-                <InfoText>Do you want to stay ahead of the game and learn what skills are on the rise? </InfoText>
-                <InfoText>Check out the history and trends section to see how the market is changing.</InfoText> */}
+                <InfoText>All data is from <InvisibleLink href="https://www.linkedin.com/feed/" target="_blank" rel="noreferrer">LinkedIn.com</InvisibleLink>, updated daily!</InfoText>
                 <br />
                 <InfoText><b>NB: This page is still in early development, more and improved features are coming.</b></InfoText>
             </Transparent>
@@ -33,3 +31,13 @@ const Wrapper = styled.div`
 const UnderTitle = styled.h2`
     color: white;
 `
+
+const InvisibleLink = styled.a`
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`
+

@@ -14,7 +14,7 @@ export const Technologies: React.FC = () => {
                     <b>Storage:</b> Cosmos Table Database<br />
                     <b>Hosting:</b> Azure App Service<br />
                     <br />
-                    <Url href="https://github.com/philiphand/linkedin-job-tracker" target="_blank">GitHub repository</Url> (Front end only)
+                    <Url href="https://github.com/philiphand/linkedin-job-tracker" target="_blank" rel="noreferrer">GitHub repository</Url> (Front end only)
                 </Infotext>
             </Transparent>
         </Wrapper>
@@ -29,8 +29,7 @@ const Wrapper = styled.div`
     padding-bottom: 800px;
 `
 
-const Title = styled.h1`
-    padding-bottom: 2px;
+const Title = styled.h1`    padding-bottom: 2px;
     border-bottom: 3px solid white;
     margin: 10px;
     color: white;
@@ -40,6 +39,6 @@ const Infotext = styled.div`
     color: white;
     margin-left: 20px;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 30px;
 `
 

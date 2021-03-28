@@ -25,7 +25,7 @@ export const MenuButton: React.FC<Props> = ({ children }) => {
 const Wrapper = styled.div<{ growHeight: string }>`
     height: 70px;
     font-size: 20px;
-    width: 155px;
+    width: 145px;
     color: white;
     outline: none;
     z-index: 1;
@@ -35,7 +35,7 @@ const Wrapper = styled.div<{ growHeight: string }>`
     box-sizing: border-box;
     transition-delay: 0.25s;
     border: 1px solid black;
-    transition: border-radius 0s ease-out 0.2s, border 0s ease-in 0.25s, height 0.25s ease-in;
+    transition: border-radius 0.1s ease-out 0.1s, border 0s ease-in 0.25s, height 0.25s ease-in;
     background-color: black;
     border-top: none;
     

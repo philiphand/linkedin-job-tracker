@@ -99,8 +99,8 @@ const SkillWrapper = styled.div`
     align-items: center;
     color: white;
     font-size: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
     margin-top: 10px;
     width: 300px;
 `

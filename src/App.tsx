@@ -6,8 +6,9 @@ import { getHistory, getYesterday } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
 import { jobTitles, TitleShortHands } from "./Scripts/jobTitleHelper";
 import { RouteList } from "./Components/RouteList/RouteList";
-import TechHorizontal from "./Images/tech.jpg"
-import TechVertical from "./Images/tech_vertical.jpg"
+import TechHorizontal from "./Images/wormhole.jpg"
+import TechVertical from "./Images/wormhole_vertical.jpg"
+import { Footer } from "./Components/Footer/Footer";
 
 export interface Skill {
 	skillName: String;
@@ -118,6 +119,7 @@ export const App: React.FC = () => {
 					}} />
 				</BackGround>
 			</Content>
+			<Footer />
 		</Router>
 	);
 }

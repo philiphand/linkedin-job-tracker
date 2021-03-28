@@ -29,13 +29,17 @@ export const Transparent = styled.div`
     border: 1px solid silver;
     border-radius: 15px;
     padding: 10px;
-    margin-bottom: 500px;
+    margin-bottom: 3500px;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 20px;
     margin-top: 20px;
     margin-right: 20px;
     margin-left: 20px;
+
+    @media only screen and (max-width: 1000px) {
+        margin-bottom: 650px;
+    }
 `
 
 export const NavButtonsWrapper = styled.div`

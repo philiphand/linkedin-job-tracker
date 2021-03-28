@@ -27,7 +27,8 @@ export const software = [
     "Google Cloud",
     "Docker",
     "Kubernetes",
-    "Amazon Web Services"
+    "Amazon Web Services",
+    "Power BI"
 ]
 
 export const libraries = [

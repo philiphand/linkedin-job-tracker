@@ -11,6 +11,7 @@ export const Scraping: React.FC = () => {
                     All data is scraped from the Linkedin job board, with only one filter enabled, which is location set to Norway.<br />
                     Please keep in mind that the search accuracy has a certain margin of error. <br />
                     This is due to various reasons like duplicate job listings, multiple spellings of keywords, small sample sizes and more.<br />
+                    There has been made several adjustments to increase the search accuracy, the source code, along with more information will be published eventually. < br />
                     The first search and insertion to the database was executed on 24.03.2021. <br />
                     As more time passes, the sample size will grow and increase the accuracy of the data displayed.<br />
                     More features and search solutions will also be developed over time.
@@ -39,5 +40,5 @@ const Infotext = styled.div`
     color: white;
     margin-left: 20px;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 30px;
 `
