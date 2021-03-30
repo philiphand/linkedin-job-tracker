@@ -9,8 +9,14 @@ export const Scraping: React.FC = () => {
                 <Title>Web scraping method</Title>
                 <Infotext>
                     All data is scraped from the Linkedin job board, with only one filter enabled, which is location set to Norway.<br />
+
+                    There are currently two different scraping methods in use: <br />
+                    1. Searching for keywords and storing the amount of search results for each keyword<br />
+                    2. Searching for job titles and scraping all keywords found in many different job descriptions <br />
+
                     Please keep in mind that the search accuracy has a certain margin of error. <br />
-                    This is due to various reasons like duplicate job listings, multiple spellings of keywords, small sample sizes and more.<br />
+                    This is due to various reasons like duplicate job listings, multiple spellings of keywords and small sample sizes<br />
+                    At the moment there is support for over 30 different spellings spread among multiple keywords (some words have more spellings than others). <br />
                     The first search and insertion to the database was executed on 24.03.2021. <br />
                     As more time passes, the sample size will grow and increase the accuracy of the data displayed.<br />
                     More search solutions will also be developed over time to further increase the search accuracy.
