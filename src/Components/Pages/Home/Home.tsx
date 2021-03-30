@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
                 <InfoText>It is especially useful for programmers wondering what technologies to learn next.</InfoText>
                 <InfoText>All data is from the <InvisibleLink href="https://www.linkedin.com/jobs/" target="_blank" rel="noreferrer">LinkedIn job board</InvisibleLink>, and the website is updated daily.</InfoText>
                 <br />
-                <InfoText><b>More features are currently in development</b></InfoText>
+                <InfoText><b>More features are currently in development, for example trending skills!</b></InfoText>
             </Transparent>
         </Wrapper>
     );
