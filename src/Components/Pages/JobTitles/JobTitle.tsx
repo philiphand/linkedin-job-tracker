@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { Description, SkillText, SumText, Transparent } from "../../Shared/shared.style";
+import { Description, SkillText, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     jobTitleSkillGroups: [[String[]]]

@@ -1,4 +1,3 @@
-import { Skill } from "../App"
 
 export function checkIfJobTitle(title: string) {
     if (title === "devops" || title === "DevOpsEngineer") return "devops"

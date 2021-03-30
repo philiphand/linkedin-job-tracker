@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Transparent, Url } from "../../Shared/shared.style";
+import { Transparent } from "../../Shared/shared.style";
 
 export const Technologies: React.FC = () => {
     return (

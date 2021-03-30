@@ -80,34 +80,3 @@ const HistoryWrapper = styled.div`
     display: flex;
     flex-direction: column;
 `
-
-const Date = styled.p`
-    margin-left: 10px;
-    color: white;
-`
-
-const SkillDayWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    border: 1px solid white;
-`
-
-const SkillWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 140px;
-`
-
-const SkillText = styled.p`
-    font-size: 18px;
-    font-weight: bold;
-    margin: 5px;
-    color: white;
-`
-
-const SumText = styled.p`
-    display: inline-block;
-    color: white;
-`
