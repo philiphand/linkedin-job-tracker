@@ -1,4 +1,2 @@
 
-export const api_url = "https://linkedin-job-tracker-api.azurewebsites.net/"
-
-//export const api_url = "http://localhost:4000/"
+export const api_url = process.env.NODE_ENV === "development" ? "http://localhost:4000/" : "https://linkedin-job-tracker-api.azurewebsites.net/"

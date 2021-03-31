@@ -57,23 +57,28 @@ export const JobTitleHome: React.FC<Props> = ({ combinedJobTitleSkills }) => {
                 </JobTitlesWrapper>
                 <UnderTitle>Combined percentages</UnderTitle>
                 <Description>Percentage of job postings where the specified keywords were found (from search results of all job titles combined)</Description>
-                <TopSkillsWrapper>
-                    {
-                        topSkills.map(skill => {
-                            return (
-                                <TopSkillWrapper key={countedSkills.indexOf(skill)}>
-                                    <Percentage>
-                                        {Math.round(skill.count / numberOfPostings * 100)}%
-                                    </Percentage>
-                                    <SkillName>
-                                        {skill.skillName}
-                                    </SkillName>
-                                </TopSkillWrapper>
-                            )
-                        })
-                    }
-                </TopSkillsWrapper>
-                <Description>Based on {singleSkillsCombined.length} keyword occurences throughout {numberOfPostings} job postings (and counting)</Description>
+                {topSkills.length !== 0 ? (
+                    <TopSkillsWrapper>
+                        {
+                            topSkills.map(skill => {
+                                return (
+                                    <TopSkillWrapper key={countedSkills.indexOf(skill)}>
+                                        <Percentage>
+                                            {Math.round(skill.count / numberOfPostings * 100)}%
+                                        </Percentage>
+                                        <SkillName>
+                                            {skill.skillName}
+                                        </SkillName>
+                                    </TopSkillWrapper>
+                                )
+                            })
+                        }
+                    </TopSkillsWrapper>
+                ) : (
+                    <UnderTitle>Connection to API failed</UnderTitle>
+                )
+                }
+                <Description>Based on {singleSkillsCombined.length} keyword occurences throughout {numberOfPostings} different job postings</Description>
             </Transparent>
         </Wrapper>
     );
