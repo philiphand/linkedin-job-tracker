@@ -5,6 +5,9 @@ export function checkIfJobTitle(title: string) {
     if (title === "backend" || title === "BackEndDeveloper") return "backend"
     if (title === "fullstack" || title === "FullStackDeveloper") return "fullstack"
     if (title === "scientist" || title === "DataScientist") return "scientist"
+    if (title === "analyst" || title === "DataAnalyst") return "analyst"
+    if (title === "machine" || title === "MachineLearningEngineer") return "machine"
+    if (title === "architect" || title === "CloudArchitect") return "architect"
     return ""
 }
 
@@ -13,6 +16,8 @@ export interface SkillCount {
     count: number;
 }
 
+
+// Counts all skills of the same kind and returns an object of sum of each skill
 export function countSingleSkills(skills: String[]) {
     let counts: any = {} // This function counts all occurences of each keyword
     skills.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
@@ -24,11 +29,6 @@ export function countSingleSkills(skills: String[]) {
     }
     countsArray.sort((a, b) => b.count - a.count);
 
-    // let topFive = []
-    // for (let i = 0; i < 5; i++) {
-    //     countsArray[i] && topFive.push(countsArray[i].skillName)
-    // }
-
     return countsArray
 }
 
@@ -37,25 +37,12 @@ export const jobTitles: string[] = [
     "FrontEndDeveloper",
     "BackEndDeveloper",
     "FullStackDeveloper",
-    "DataScientist"
+    "DataScientist",
+    "DataAnalyst",
+    "MachineLearningEngineer",
+    "CloudArchitect"
 ]
 
-export interface TitleObject {
-    titles: {
-        devops: "DevOpsEngineer",
-        frontend: "FrontEndDeveloper",
-        backend: "BackEndDeveloper",
-        fullstack: "FullStackDeveloper",
-        scientist: "DataScientist"
-    }
-}
-export interface JobTitleSkillGroups {
-    devops: [string[]];
-    frontend: [string[]];
-    backend: [string[]];
-    fullstack: [string[]];
-    scientist: [string[]];
-}
 
 export enum TitleShortHands {
     devops = "DevOpsEngineer",
@@ -63,12 +50,4 @@ export enum TitleShortHands {
     backend = "BackEndDeveloper",
     fullstack = "FullStackDeveloper",
     scientist = "DataScientist"
-}
-
-export const emptyJobTitleObject: JobTitleSkillGroups = {
-    devops: [[]],
-    frontend: [[]],
-    backend: [[]],
-    fullstack: [[]],
-    scientist: [[]]
 }

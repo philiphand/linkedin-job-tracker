@@ -1,45 +1,42 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { DatedResult } from "../../../App";
+import { DatedResult, Skill } from "../../../App";
 import { PageTitle, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [DatedResult];
 }
 
+const emptySkill: Skill = { skillName: "", searchResultSum: "" }
+
 export const History: React.FC<Props> = ({ allSkillsHistory }) => {
-    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", content: [] }])
+    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        let topTenHistory: [DatedResult] = [{ date: "", content: [] }]
-        allSkillsHistory.forEach(allSkillsDay => {
+    //     let topTenHistory: [DatedResult] = [{ date: "", keywords: [emptySkill] }]
+    //     allSkillsHistory.forEach(allSkillsDay => {
 
-            let counter = 0
-            let topTenDay: DatedResult = { date: allSkillsDay.date, content: [] }
-            allSkillsDay.content.forEach(skill => {
-                if (counter < 10) { topTenDay.content.push(skill) }
-                counter++
-            })
-            counter = 0
+    //         let counter = 0
+    //         let topTenDay: DatedResult = { date: allSkillsDay.date, keywords: [emptySkill] }
+    //         allSkillsDay.keywords.forEach(skill => {
+    //             if (counter < 10) { topTenDay.keywords.push(skill) }
+    //             counter++
+    //         })
+    //         counter = 0
 
 
-            topTenHistory.push(topTenDay)
-        })
+    //         topTenHistory.push(topTenDay)
+    //     })
 
-        topTenHistory.splice(0, 2) // Removes inital placeholder values
+    //     topTenHistory.splice(0, 2) // Removes inital placeholder values
 
-        console.log(topTenHistory)
-        let sortedTopTenHistory = topTenHistory.sort((a: { date: string; }, b: { date: string; }) => parseFloat(b.date) - parseFloat(a.date));
-        console.log(sortedTopTenHistory)
+    //     let sortedTopTenHistory = topTenHistory.sort((a: { date: string; }, b: { date: string; }) => parseFloat(b.date) - parseFloat(a.date));
+    //     sortedTopTenHistory.reverse()
 
-        //topTenHistory
-
-        setTopTenSkillsHistory(topTenHistory)
-    }, [allSkillsHistory])
-
-    console.log(topTenSkillsHistory)
-
+    //     setTopTenSkillsHistory(topTenHistory)
+    //     console.log(topTenSkillsHistory)
+    // }, [allSkillsHistory, topTenSkillsHistory])
 
     return (
         <Wrapper>
@@ -58,10 +55,10 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
                                 <SkillDayWrapper key={topTenSkillsHistory.indexOf(array)}>
                                     <Date>{formattedDate}</Date>
                                     {
-                                        array.content.map(skill => {
+                                        array.keywords.map(skill => {
                                             return (
-                                                <SkillWrapper key={array.content.indexOf(skill)}>
-                                                    <SkillText>{array.content.indexOf(skill) + 1}. {skill.skillName}</SkillText>
+                                                <SkillWrapper key={array.keywords.indexOf(skill)}>
+                                                    <SkillText>{array.keywords.indexOf(skill) + 1}. {skill.skillName}</SkillText>
                                                     <SumText>{`${skill.searchResultSum}`}</SumText>
                                                 </SkillWrapper>
                                             )

@@ -9,12 +9,12 @@ export const Home: React.FC = () => {
         <Wrapper>
             <Transparent>
                 <PageTitle>Welcome</PageTitle>
-                <UnderTitle>This page is an overview of Norway's most in-demand tech skills</UnderTitle>
+                <UnderTitle>This page provides an overview of Norway's most in-demand tech skills</UnderTitle>
                 <InfoText>It was created to get a better understanding of the software and information technology job market.</InfoText>
                 <InfoText>It is especially useful for programmers wondering what technologies to learn next.</InfoText>
-                <InfoText>All data is from the <InvisibleLink href="https://www.linkedin.com/jobs/" target="_blank" rel="noreferrer">LinkedIn job board</InvisibleLink>, and the website is updated daily.</InfoText>
+                <InfoText>All data is scraped from the <InvisibleLink href="https://www.linkedin.com/jobs/" target="_blank" rel="noreferrer">LinkedIn job board</InvisibleLink>, and the website is updated daily.</InfoText>
                 <br />
-                <InfoText><b>More features are currently in development, for example trending skills!</b></InfoText>
+                <InfoText><b>More features are currently in development</b></InfoText>
             </Transparent>
         </Wrapper>
     );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Header } from "./Components/HeaderMenu/Header";
 import { BrowserRouter as Router } from "react-router-dom";
-import { getHistory, getYesterday } from "./Scripts/dateHelper";
+import { getHistory } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
 import { jobTitles, TitleShortHands } from "./Scripts/jobTitleHelper";
 import { RouteList } from "./Components/RouteList/RouteList";
@@ -11,13 +11,13 @@ import TechVertical from "./Images/network2_swap.jpg"
 import { Footer } from "./Components/Footer/Footer";
 
 export interface Skill {
-	skillName: String;
-	searchResultSum: String;
+	skillName: string;
+	searchResultSum: string;
 }
 
 export interface DatedResult {
 	date: string;
-	content: Skill[];
+	keywords: [Skill];
 }
 
 // Main component
@@ -31,8 +31,8 @@ export interface DatedResult {
 // TODO: Move most of the data processing to the API instead
 
 export const App: React.FC = () => {
-	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", content: [] }])
-	const [allSkillsToday, setAllSkillsToday] = useState<Skill[]>([])
+	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
+	const [allSkillsToday, setAllSkillsToday] = useState<[Skill]>([{ skillName: "", searchResultSum: "" }])
 
 	// Job titles 
 	const [devOpsSkills, setDevOpsSkills] = useState<[[String[]]]>([[[]]])
@@ -44,43 +44,21 @@ export const App: React.FC = () => {
 
 
 	useEffect(() => {
-		const historyDates = getHistory()
-		let allResults: any = []
-		let datedResults: [DatedResult] = [{ date: "", content: [] }]
 
+		// Fetch keyword history
+		fetch(api_url + "keywords/history").then(res => {
+			res.json().then((keywordHistory: [DatedResult]) => {
+				console.log(keywordHistory)
+				setAllSkillsHistory(keywordHistory)
 
-		// Fetch all keyword search results
-
-		historyDates.forEach(date => {
-
-			fetch(api_url + "all/" + date).then(res => {
-				res.json().then(data => {
-
-					// Sorts all skills by searchResultSum in descending order
-					let result = data.entities.sort((a: { searchResultSum: string; }, b: { searchResultSum: string; }) => parseFloat(b.searchResultSum) - parseFloat(a.searchResultSum));
-
-					// Handle incorrect skill names here (TODO: Move this to the API)
-					result.forEach((entity: Skill) => {
-						if (entity.skillName === "Csharp") entity.skillName = "C#"
-						if (entity.skillName === "CICD") entity.skillName = "CI/CD"
-					})
-
-					if (result.length > 0) datedResults.push({ date: data.date, content: result })
-
-					allResults.push(result)
-
-					if (date === getYesterday()) {
-						setAllSkillsToday(result) // Results from yesterday
-					}
-				})
+				console.log(keywordHistory[keywordHistory.length - 1])
+				setAllSkillsToday(keywordHistory[keywordHistory.length - 1].keywords)
 			})
 		})
-		setAllSkillsHistory(datedResults)
-		console.log(datedResults)
 
+		const historyDates = getHistory()
 
-		// Fetch all job title searches
-
+		// Fetch all job titles
 		let allResultsArray: [[[String[]]]] = [[[[]]]]
 		jobTitles.forEach(title => {
 			let allResults: [[String[]]] = [[[]]]
