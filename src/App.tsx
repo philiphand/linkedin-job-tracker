@@ -20,19 +20,22 @@ export interface DatedResult {
 	keywords: [Skill];
 }
 
-// Main component
-// This is where all data is fetched from the API and stored in a "global state"
-// No state management library is used, all state is simply passed as props
-// This is because the application has at maximum 3 levels, 
-// i.e. all components are at most 2 prop drills away from eachother
-// All data is fetched once, to prevent loading times and server load when switching pages
+export interface ChartData {
+	data: [[number, number]];
+	averageSum: number;
+	label: string;
+}
 
+export interface AllChartData {
+	[skillName: string]: ChartData;
+}
 
 // TODO: Move most of the data processing to the API instead
 
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
 	const [allSkillsToday, setAllSkillsToday] = useState<[Skill]>([{ skillName: "", searchResultSum: "" }])
+	const [allChartData, setAllChartData] = useState<AllChartData>({ skillname: { label: "", averageSum: 0, data: [[0, 0]] } })
 
 	// Job titles 
 	const [devOpsSkills, setDevOpsSkills] = useState<[[String[]]]>([[[]]])
@@ -45,7 +48,6 @@ export const App: React.FC = () => {
 
 	useEffect(() => {
 
-		// Fetch keyword history
 		fetch(api_url + "keywords/history").then(res => {
 			res.json().then((keywordHistory: [DatedResult]) => {
 				console.log(keywordHistory)
@@ -53,6 +55,13 @@ export const App: React.FC = () => {
 
 				console.log(keywordHistory[keywordHistory.length - 1])
 				setAllSkillsToday(keywordHistory[keywordHistory.length - 1].keywords)
+			})
+		})
+
+		fetch(api_url + "keywords/history/chart").then(res => {
+			res.json().then((result: AllChartData) => {
+				console.log(result)
+				setAllChartData(result)
 			})
 		})
 

@@ -1,48 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components"
-import { DatedResult, Skill } from "../../../App";
+import { AllChartData } from "../../../App";
 import { PageTitle, Transparent } from "../../Shared/shared.style";
 import { Chart } from 'react-charts'
-
-interface Props {
-    allSkillsHistory: [DatedResult];
-}
-
-interface ChartLine {
-    label: string;
-    data: [number[]]
-}
-
-const emptySkill: Skill = { skillName: "", searchResultSum: "" }
-
-export const HistoryChart: React.FC<Props> = ({ allSkillsHistory }) => {
-    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [emptySkill] }])
+import { api_url } from "../../../Scripts/api";
 
 
-    const azureLine = allSkillsHistory.forEach(datedResult => {
-
+export const HistoryChart: React.FC = () => {
+    const [allChartData, setAllChartData] = useState<AllChartData>({
+        // Chart needs to be initalized with any value other than 0 for the axis to display correct numbers
+        skillname: { label: "", averageSum: 0, data: [[0, 1000]] }
     })
 
+    useEffect(() => {
+        fetch(api_url + "keywords/history/chart").then(res => {
+            res.json().then((result: AllChartData) => {
+                console.log(result)
+                setAllChartData(result)
+            })
+        })
+    }, [])
+
+
     const data = React.useMemo(
-        () => [
-            {
-                label: 'Series 1',
-                data: [[0, 1], [1, 10], [2, 4], [3, 2], [4, 7]]
-            },
-            {
-                label: 'Series 2',
-                data: [[0, 3], [1, 1], [2, 100], [3, 6], [4, 4]]
+        () => {
+            let chartData = []
+
+            for (const skillName in allChartData) {
+                const lineLabel = allChartData[skillName]["label"]
+                let lineData = allChartData[skillName]["data"]
+
+                let chartLine = { label: lineLabel, data: lineData }
+                chartData.push(chartLine)
             }
-        ],
-        []
+
+            return chartData
+        },
+        [allChartData]
     )
 
     const axes = React.useMemo(
-        () => [
-            { primary: true, type: 'linear', position: 'bottom' },
-            { type: 'linear', position: 'left' }
-        ],
-        []
+        () => {
+            console.log(allChartData)
+            return [
+                { primary: true, type: 'utc', position: 'bottom' },
+                { type: 'linear', position: 'left' }
+            ]
+        },
+        [allChartData]
     )
 
     return (
@@ -56,7 +61,9 @@ export const HistoryChart: React.FC<Props> = ({ allSkillsHistory }) => {
                             height: '500px'
                         }}
                     >
-                        <Chart data={data} axes={axes} dark />
+                        <Chart data={data} axes={axes} dark tooltip={{
+                            anchor: "gridRight"
+                        }} />
                     </div>
                 </HistoryWrapper>
             </Transparent>

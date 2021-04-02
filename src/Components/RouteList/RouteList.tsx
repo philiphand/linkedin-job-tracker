@@ -10,6 +10,7 @@ import { History } from "../Pages/History/History";
 import { Scraping } from "../Pages/About/Scraping";
 import { Home } from "../Pages/Home/Home";
 import { HistoryChart } from "../Pages/History/HistoryChart";
+import { AllChartData } from "../../App";
 
 interface AppData {
     allSkillsHistory: any;
@@ -42,7 +43,7 @@ export const RouteList: React.FC<Props> = ({
     return (
         <Switch>
             <Route path="/history/chart">
-                <HistoryChart allSkillsHistory={allSkillsHistory} />
+                <HistoryChart />
             </Route>
             <Route path="/history">
                 <History allSkillsHistory={allSkillsHistory} />

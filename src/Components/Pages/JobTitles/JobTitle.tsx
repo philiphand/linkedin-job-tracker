@@ -32,6 +32,7 @@ export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => 
                     if (skill === "Csharp") skill = "C#"
                     if (skill === "CICD") skill = "CI/CD"
                     if (skill === "Java ") skill = "Java"
+                    if (skill === "AWS") skill = "Amazon Web Services"
                     newArray.push(skill)
                 })
             });
