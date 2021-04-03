@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# This is a web app for displaying Norway's most in-demand tech skill
+## This is a web app for displaying Norway's most in-demand tech skill
 
 The live website is available at https://gentle-tree-0b1eb9d03.azurestaticapps.net
 
