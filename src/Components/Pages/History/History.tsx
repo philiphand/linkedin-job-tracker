@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components"
-import { DatedResult, Skill } from "../../../App";
+import { DatedResult } from "../../../App";
 import { PageTitle, Transparent } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [DatedResult];
 }
 
-const emptySkill: Skill = { skillName: "", searchResultSum: "" }
-
-export const History: React.FC<Props> = ({ allSkillsHistory }) => {
-    const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
+export const History: React.FC<Props> = () => {
+    //const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
 
     // useEffect(() => {
 
@@ -43,7 +41,7 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
             <Transparent>
                 <PageTitle>History</PageTitle>
                 <HistoryWrapper>
-                    {
+                    {/* {
                         topTenSkillsHistory.map(array => {
                             let formattedDate = array.date.toString()
                             const month = formattedDate.substring(0, 2) + "."
@@ -67,7 +65,7 @@ export const History: React.FC<Props> = ({ allSkillsHistory }) => {
                                 </SkillDayWrapper>
                             )
                         })
-                    }
+                    } */}
                 </HistoryWrapper>
             </Transparent>
         </Wrapper>
@@ -84,37 +82,4 @@ const Wrapper = styled.div`
 const HistoryWrapper = styled.div`
     display: flex;
     flex-direction: row;
-`
-
-const Date = styled.p`
-    margin-left: 10px;
-    color: white;
-`
-
-const SkillDayWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    border: 1px solid white;
-    padding-left: 10px;
-    padding-right: 10px;
-`
-
-const SkillWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 140px;
-`
-
-const SkillText = styled.p`
-    font-size: 18px;
-    font-weight: bold;
-    margin: 5px;
-    color: white;
-`
-
-const SumText = styled.p`
-    display: inline-block;
-    color: white;
 `

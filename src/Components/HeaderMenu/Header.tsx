@@ -20,12 +20,13 @@ export const Header: React.FC = () => {
                 <MenuOption name="Today" url="/today/all" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Job titles" url="/jobtitles" />
-                <MenuOption name="Full Stack Developer" url="/jobtitles/fullstack" />
-                <MenuOption name="Back End Developer" url="/jobtitles/backend" />
-                <MenuOption name="Front End Developer" url="/jobtitles/frontend" />
-                <MenuOption name="DevOps Engineer" url="/jobtitles/devops" />
-                <MenuOption name="Data Scientist" url="/jobtitles/scientist" />
+                <MenuOption name="Job titles" url="/jobtitles/home" />
+                {/* TODO: Iterate through jobtitles instead of hardcoding */}
+                <MenuOption name="Full Stack Developer" url="/jobtitles/FullStackDeveloper" />
+                <MenuOption name="Back End Developer" url="/jobtitles/BackEndDeveloper" />
+                <MenuOption name="Front End Developer" url="/jobtitles/FrontEndDeveloper" />
+                <MenuOption name="DevOps Engineer" url="/jobtitles/DevOpsEngineer" />
+                <MenuOption name="Data Scientist" url="/jobtitles/DataScientist" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Categories" url="/categories/languages" />

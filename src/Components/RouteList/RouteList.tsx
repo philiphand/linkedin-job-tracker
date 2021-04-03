@@ -10,17 +10,10 @@ import { History } from "../Pages/History/History";
 import { Scraping } from "../Pages/About/Scraping";
 import { Home } from "../Pages/Home/Home";
 import { HistoryChart } from "../Pages/History/HistoryChart";
-import { AllChartData } from "../../App";
 
 interface AppData {
     allSkillsHistory: any;
     allSkillsToday: any;
-    devOpsSkills: any;
-    frontEndSkills: any;
-    backEndSkills: any;
-    fullStackSkills: any;
-    scientistSkills: any;
-    combinedJobTitleSkills: any;
 }
 
 interface Props {
@@ -32,12 +25,6 @@ export const RouteList: React.FC<Props> = ({
     appData: {
         allSkillsHistory,
         allSkillsToday,
-        devOpsSkills,
-        frontEndSkills,
-        backEndSkills,
-        fullStackSkills,
-        scientistSkills,
-        combinedJobTitleSkills
     }
 }) => {
     return (
@@ -66,23 +53,11 @@ export const RouteList: React.FC<Props> = ({
             <Route path="/categories/other">
                 <Category allSkillsToday={allSkillsToday} categoryArray={other} categoryName="Other keywords" />
             </Route>
-            <Route path="/jobtitles/devops">
-                <JobTitle jobTitleSkillGroups={devOpsSkills} jobTitle="DevOps Engineer" />
+            <Route path="/jobtitles/home">
+                <JobTitleHome />
             </Route>
-            <Route path="/jobtitles/frontend">
-                <JobTitle jobTitleSkillGroups={frontEndSkills} jobTitle="Front End Developer" />
-            </Route>
-            <Route path="/jobtitles/backend">
-                <JobTitle jobTitleSkillGroups={backEndSkills} jobTitle="Back End Developer" />
-            </Route>
-            <Route path="/jobtitles/fullstack">
-                <JobTitle jobTitleSkillGroups={fullStackSkills} jobTitle="Full Stack Developer" />
-            </Route>
-            <Route path="/jobtitles/scientist">
-                <JobTitle jobTitleSkillGroups={scientistSkills} jobTitle="Data Scientist" />
-            </Route>
-            <Route path="/jobtitles">
-                <JobTitleHome combinedJobTitleSkills={combinedJobTitleSkills} />
+            <Route path="/jobtitles/:jobTitle">
+                <JobTitle />
             </Route>
             <Route path="/about/scraping">
                 <Scraping />

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Header } from "./Components/HeaderMenu/Header";
 import { BrowserRouter as Router } from "react-router-dom";
-import { getHistory } from "./Scripts/dateHelper";
 import { api_url } from "./Scripts/api";
-import { jobTitles, TitleShortHands } from "./Scripts/jobTitleHelper";
 import { RouteList } from "./Components/RouteList/RouteList";
 import TechHorizontal from "./Images/network2.jpg"
 import TechVertical from "./Images/network2_swap.jpg"
@@ -35,16 +33,6 @@ export interface AllChartData {
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
 	const [allSkillsToday, setAllSkillsToday] = useState<[Skill]>([{ skillName: "", searchResultSum: "" }])
-	const [allChartData, setAllChartData] = useState<AllChartData>({ skillname: { label: "", averageSum: 0, data: [[0, 0]] } })
-
-	// Job titles 
-	const [devOpsSkills, setDevOpsSkills] = useState<[[String[]]]>([[[]]])
-	const [frontEndSkills, setFrontEndSkills] = useState<[[String[]]]>([[[]]])
-	const [backEndSkills, setBackEndSkills] = useState<[[String[]]]>([[[]]])
-	const [fullStackSkills, setFullStackSkills] = useState<[[String[]]]>([[[]]])
-	const [scientistSkills, setScientistSkills] = useState<[[String[]]]>([[[]]])
-	const [combinedJobTitleSkills, setCombinedJobTitleSkills] = useState<[[[String[]]]]>([[[[]]]])
-
 
 	useEffect(() => {
 
@@ -58,40 +46,6 @@ export const App: React.FC = () => {
 			})
 		})
 
-		fetch(api_url + "keywords/history/chart").then(res => {
-			res.json().then((result: AllChartData) => {
-				console.log(result)
-				setAllChartData(result)
-			})
-		})
-
-		const historyDates = getHistory()
-
-		// Fetch all job titles
-		let allResultsArray: [[[String[]]]] = [[[[]]]]
-		jobTitles.forEach(title => {
-			let allResults: [[String[]]] = [[[]]]
-
-			historyDates.forEach(date => {
-				fetch(api_url + "jobtitle/" + title + "/" + date).then(res => {
-					res.json().then(data => {
-						const skills = data.keywordGroups
-						if (skills.length > 1) allResults.push(skills) // Don't add empty placeholder arrays
-					})
-				})
-			})
-			allResults.splice(0, 1) // Removes empty placeholder array
-
-
-			if (title === TitleShortHands.devops) setDevOpsSkills(allResults)
-			if (title === TitleShortHands.frontend) setFrontEndSkills(allResults)
-			if (title === TitleShortHands.backend) setBackEndSkills(allResults)
-			if (title === TitleShortHands.fullstack) setFullStackSkills(allResults)
-			if (title === TitleShortHands.scientist) setScientistSkills(allResults)
-			allResultsArray.push(allResults)
-		})
-
-		setCombinedJobTitleSkills(allResultsArray)
 	}, [])
 
 	return (
@@ -101,13 +55,7 @@ export const App: React.FC = () => {
 				<BackGround>
 					<RouteList appData={{
 						allSkillsHistory,
-						allSkillsToday,
-						devOpsSkills,
-						frontEndSkills,
-						backEndSkills,
-						fullStackSkills,
-						scientistSkills,
-						combinedJobTitleSkills
+						allSkillsToday
 					}} />
 				</BackGround>
 			</Content>

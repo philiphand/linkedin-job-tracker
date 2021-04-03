@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components"
+import { api_url } from "../../../Scripts/api";
 import { Description, SkillText, Transparent } from "../../Shared/shared.style";
 
-interface Props {
-    jobTitleSkillGroups: [[String[]]]
-    jobTitle: String;
+interface KeywordGroupDate {
+    date: string;
+    keywordGroups: [[string]]
 }
-
+interface KeywordGroupsHistory {
+    jobTitle: string;
+    dates: [KeywordGroupDate]
+}
 interface SkillCount {
     skillName: String;
     count: number;
@@ -15,41 +20,44 @@ interface SkillCount {
 // Dynamic component for any job title
 // jobTitleSkillGroup contains the history of all skillGroups for the specific job title
 
-export const JobTitle: React.FC<Props> = ({ jobTitleSkillGroups, jobTitle }) => {
+export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route names for react-router (for use in RouteList)
+    const [numberOfListings, setNumberOfListings] = useState<number>(0) // Used for calculating percentages
+    //const [separatedKeywords, setSeparatedKeywords] = useState<string[]>([]) // Used for counting sum of each keyword
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
-
-    let numberOfListings = jobTitleSkillGroups.length
-
-    jobTitleSkillGroups.forEach(listingsPerDay => {
-        numberOfListings += listingsPerDay.length
-    })
+    let { jobTitle }: any = useParams();
 
     useEffect(() => {
-        let newArray: String[] = []
-        jobTitleSkillGroups.forEach((arrayOfSkillGroups) => {
-            arrayOfSkillGroups.forEach(skillGroup => {
-                skillGroup.forEach(skill => {
-                    if (skill === "Csharp") skill = "C#"
-                    if (skill === "CICD") skill = "CI/CD"
-                    if (skill === "Java ") skill = "Java"
-                    if (skill === "AWS") skill = "Amazon Web Services"
-                    newArray.push(skill)
+        let separatedKeywords: string[] = []
+        let listingsCounter = 0
+
+
+        fetch(api_url + "jobtitle/" + jobTitle).then(res => {
+            res.json().then((keywordGroupsHistory: KeywordGroupsHistory) => {
+                console.log(keywordGroupsHistory)
+                keywordGroupsHistory.dates.forEach(keywordGroupsDate => {
+                    keywordGroupsDate.keywordGroups.forEach(keywordGroup => {
+                        keywordGroup.forEach(keyword => {
+                            separatedKeywords.push(keyword)
+                        });
+                        listingsCounter += 1
+                    });
                 })
-            });
-        });
+                let counts: any = {} // This function counts all occurences of each keyword and adds them together
+                separatedKeywords.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
 
-        let counts: any = {} // This function counts all occurences of each keyword and adds them together
-        newArray.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
+                // Re-formats keyword object
+                let countsArray: SkillCount[] = []
+                for (const property in counts) {
+                    countsArray.push({ skillName: property, count: counts[property] })
+                }
+                countsArray.sort((a, b) => b.count - a.count);
 
-        // Re-formats keyword object
-        let countsArray: SkillCount[] = []
-        for (const property in counts) {
-            countsArray.push({ skillName: property, count: counts[property] })
-        }
-        countsArray.sort((a, b) => b.count - a.count);
-
-        setSkillCounts(countsArray)
-    }, [jobTitleSkillGroups])
+                setSkillCounts(countsArray)
+                console.log(countsArray)
+                setNumberOfListings(listingsCounter)
+            })
+        })
+    }, [jobTitle])
 
     return (
         <Wrapper>
