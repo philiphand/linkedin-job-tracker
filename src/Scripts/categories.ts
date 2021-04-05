@@ -1,9 +1,8 @@
-
-export const programmingLanguages = [
+export const languages = [
     "JavaScript",
     "Python",
     "Java",
-    "C",
+    "Embedded",
     "C#",
     "C++",
     "SQL",
@@ -15,9 +14,7 @@ export const programmingLanguages = [
     "Kotlin",
     "PHP",
     "Golang",
-    "Bash",
-    "Shell",
-    "Powershell"
+    "Perl"
 ]
 
 export const software = [
@@ -25,13 +22,22 @@ export const software = [
     "Azure",
     "AWS",
     "Google Cloud",
-    "Docker",
-    "Kubernetes",
-    "Amazon Web Services",
-    "Power BI"
+    "Power BI",
+    "Tableau",
+    "Photoshop",
+    "Illustrator",
+    "SharePoint",
+    "Microsoft Dynamics",
+    "VMware",
+    "Oracle",
+    "Figma",
+    "Terraform",
+    "Puppet",
+    "GCP",
+    "Microsoft Excel"
 ]
 
-export const libraries = [
+export const frameworks = [
     "React",
     "Angular",
     "Vue",
@@ -39,29 +45,46 @@ export const libraries = [
     "Spring",
     ".NET",
     "Spark",
-    "Hadoop"
+    "Hadoop",
+    "Django",
+    "PyTorch",
+    "SciKit",
+    "TensorFlow",
+    "BigQuery",
+    "Kafka",
+    "ElasticSearch",
+    "Flask"
 ]
 
 export const other = [
     "Artificial intelligence",
     "Machine learning",
     "CI/CD",
+    "Linux",
     "REST",
     "GraphQL",
     "Oracle",
     "NoSQL",
     "MySQL",
+    "Docker",
+    "Kubernetes",
     "Databases",
     "UX",
     "SEO",
-    "SMM",
-    "PPC",
     "CRO",
     "DevOps",
-    "VR",
+    "Virtual reality",
     "Blockchain",
-    "Linux",
     "Scrum",
     "Cybersecurity",
-    "Big Data"
+    "Big data",
+    "Unix",
+    "Data science",
+    "MongoDB",
+    "PostgreSQL",
+    "Bash",
+    "Shell",
+    "Powershell",
+    "Node",
+    "Git"
 ]

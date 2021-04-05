@@ -32,7 +32,6 @@ export interface AllChartData {
 
 export const App: React.FC = () => {
 	const [allSkillsHistory, setAllSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
-	const [allSkillsToday, setAllSkillsToday] = useState<[Skill]>([{ skillName: "", searchResultSum: "" }])
 
 	useEffect(() => {
 
@@ -40,9 +39,6 @@ export const App: React.FC = () => {
 			res.json().then((keywordHistory: [DatedResult]) => {
 				console.log(keywordHistory)
 				setAllSkillsHistory(keywordHistory)
-
-				console.log(keywordHistory[keywordHistory.length - 1])
-				setAllSkillsToday(keywordHistory[keywordHistory.length - 1].keywords)
 			})
 		})
 
@@ -54,8 +50,7 @@ export const App: React.FC = () => {
 			<Content>
 				<BackGround>
 					<RouteList appData={{
-						allSkillsHistory,
-						allSkillsToday
+						allSkillsHistory
 					}} />
 				</BackGround>
 			</Content>

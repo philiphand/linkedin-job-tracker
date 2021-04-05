@@ -16,8 +16,8 @@ export const Header: React.FC = () => {
                 <MenuOption name="Trends" url="/history/trends" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="All skills" url="/today/all" />
-                <MenuOption name="Today" url="/today/all" />
+                <MenuOption name="All skills" url="/skills/weekly/all" />
+                <MenuOption name="This week" url="/skills/weekly/all" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="Job titles" url="/jobtitles/home" />
@@ -29,11 +29,11 @@ export const Header: React.FC = () => {
                 <MenuOption name="Data Scientist" url="/jobtitles/DataScientist" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Categories" url="/categories/languages" />
-                <MenuOption name="Programming languages" url="/categories/languages" />
-                <MenuOption name="Frameworks and libraries" url="/categories/libraries" />
-                <MenuOption name="Software" url="/categories/software" />
-                <MenuOption name="Other" url="/categories/other" />
+                <MenuOption name="Categories" url="/skills/weekly/languages" />
+                <MenuOption name="Programming languages" url="/skills/weekly/languages" />
+                <MenuOption name="Frameworks and libraries" url="/skills/weekly/frameworks" />
+                <MenuOption name="Software" url="/skills/weekly/software" />
+                <MenuOption name="Other" url="/skills/weekly/other" />
             </MenuButton>
             <MenuButton>
                 <MenuOption name="About" url="/" />
