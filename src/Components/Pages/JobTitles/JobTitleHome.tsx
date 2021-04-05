@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components"
-import { PageTitle, Transparent } from "../../Shared/shared.style";
-import { jobTitles } from "../../../Scripts/jobTitleHelper";
+import { PageTitle, Transparent, UnderTitle } from "../../Shared/shared.style";
+import { jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
 import { Link } from "react-router-dom";
 
-function separateUppercases(title: string) {
+let softwareDevelopers: string[] = []
+let otherTitles: string[] = []
 
-    return title.replace(/([A-Z])/g, ' $1').trim()
+for (let i = 0; i < jobTitles.length; i++) {
+    if (i < 4) softwareDevelopers.push(jobTitles[i])
+    if (i >= 4) otherTitles.push(jobTitles[i])
 }
 
 export const JobTitleHome: React.FC = () => {
@@ -15,11 +18,24 @@ export const JobTitleHome: React.FC = () => {
         <Wrapper>
             <Transparent>
                 <PageTitle>All job titles</PageTitle>
+                <UnderTitle>Software developers</UnderTitle>
                 <JobTitlesWrapper>
                     {
-                        jobTitles.map((title) => {
+                        softwareDevelopers.map((title) => {
                             return (
-                                <StyledLink key={jobTitles.indexOf(title)} to={"/jobtitles/" + title}>
+                                <StyledLink key={softwareDevelopers.indexOf(title)} to={"/jobtitles/" + title}>
+                                    <JobTitle>{separateUppercases(title)}</JobTitle>
+                                </StyledLink>
+                            )
+                        })
+                    }
+                </JobTitlesWrapper>
+                <UnderTitle>Other job titles</UnderTitle>
+                <JobTitlesWrapper>
+                    {
+                        otherTitles.map((title) => {
+                            return (
+                                <StyledLink key={otherTitles.indexOf(title)} to={"/jobtitles/" + title}>
                                     <JobTitle>{separateUppercases(title)}</JobTitle>
                                 </StyledLink>
                             )
@@ -63,17 +79,5 @@ const JobTitle = styled.h3`
     &:hover {
         text-decoration: underline;
         text-decoration-thickness: 1px;
-    }
-
-    @keyframes fade {
-        from {
-            text-decoration-line: underline;
-            text-decoration-thickness: 1px;
-        }
-
-        to {
-            text-decoration-line: underline;
-            text-decoration-thickness: 1px;
-        }
     }
 `

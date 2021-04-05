@@ -8,18 +8,17 @@ export const Scraping: React.FC = () => {
             <Transparent>
                 <Title>Web scraping method</Title>
                 <Infotext>
-                    All data is scraped from the Linkedin job board, with only one filter enabled, which is location set to Norway.<br />
+                    All data is scraped from the Linkedin job board, with only one filter enabled, which is location set to Norway.<br /><br />
 
                     There are currently two different scraping methods in use: <br />
-                    1. Searching for keywords and storing the amount of search results for each keyword<br />
-                    2. Searching for job titles and scraping all keywords found in many different job descriptions <br />
+                    1. Searching for a keyword and scraping the amount of search results<br />
+                    2. Searching for a job title and going through all job postings individually and scraping all keywords found<br /><br />
 
-                    Please keep in mind that the search accuracy has a certain margin of error. <br />
-                    This is due to various reasons like duplicate job listings, multiple spellings of keywords and small sample sizes<br />
-                    At the moment there is support for over 30 different spellings spread among multiple keywords (some words have more spellings than others). <br />
-                    The first search and insertion to the database was executed on 24.03.2021. <br />
+                    Please keep in mind that the accuracy of the collected data has a certain margin of error, . <br />
+                    There are many reasons for this, e.g. duplicate job listings, multiple spellings of keywords, small sample sizes and of course inaccuracy in LinkedIn's own search engine.<br />
                     As more time passes, the sample size will grow and increase the accuracy of the data displayed.<br />
-                    More search solutions will also be developed over time to further increase the search accuracy.
+                    At the moment there is support for over 30 different spellings, along with some other small adjustments to increase the accuracy.<br />
+                    More search solutions will be developed over time to further increase the accuracy of the data.
                 </Infotext>
             </Transparent>
         </Wrapper>
@@ -44,6 +43,7 @@ const Title = styled.h1`
 const Infotext = styled.div`
     color: white;
     margin-left: 20px;
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 20px;
+    max-width: 750px;
 `

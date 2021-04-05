@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components"
 import { api_url } from "../../../Scripts/api";
+import { separateUppercases } from "../../../Scripts/jobTitleHelper";
 import { Description, SkillText, Transparent } from "../../Shared/shared.style";
 
 interface KeywordGroupDate {
@@ -32,6 +33,7 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
 
 
         fetch(api_url + "jobtitle/" + jobTitle).then(res => {
+            // TODO: Move most of this to the API
             res.json().then((keywordGroupsHistory: KeywordGroupsHistory) => {
                 console.log(keywordGroupsHistory)
                 keywordGroupsHistory.dates.forEach(keywordGroupsDate => {
@@ -63,8 +65,8 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
         <Wrapper>
             <Transparent>
                 <SkillTableWrapper>
-                    <Title>{jobTitle}</Title>
-                    <Description>Percentage of job postings where the specified keywords were found when searching for {jobTitle}</Description>
+                    <Title>{separateUppercases(jobTitle)}</Title>
+                    <Description>Percentage of job postings where the specified keywords were found when searching for {separateUppercases(jobTitle)}</Description>
                     {
                         skillCounts.map(skill => {
                             const index = skillCounts.indexOf(skill)

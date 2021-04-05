@@ -8,11 +8,10 @@ export const Technologies: React.FC = () => {
             <Transparent>
                 <Title>Technologies used</Title>
                 <Infotext>
-                    <b>Web scraping:</b> Python, BeautifulSoup4, Azure Time Trigger Function<br />
-                    <b>Front end:</b> React, TypeScript, Styled Components<br />
+                    <b>Web scraping:</b> Python, BeautifulSoup4, Azure Function App<br />
+                    <b>Front end:</b> React, TypeScript, Styled Components, React Charts<br />
                     <b>Back end:</b> Node.js, Express, Cosmos DB Table API<br />
-                    <b>Storage:</b> Cosmos Table Database<br />
-                    <b>Hosting:</b> Azure App Service<br />
+                    <b>Storage:</b> Cosmos Table DB (NoSQL)<br />
                 </Infotext>
             </Transparent>
         </Wrapper>

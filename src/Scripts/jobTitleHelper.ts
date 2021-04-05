@@ -32,6 +32,14 @@ export function countSingleSkills(skills: String[]) {
     return countsArray
 }
 
+export function separateUppercases(title: string) {
+    let separatedTitle = title.replace(/([A-Z])/g, ' $1').trim()
+    if (separatedTitle === "Dev Ops Engineer") separatedTitle = separatedTitle.replace("v O", "vO")
+
+    return separatedTitle
+}
+
+
 export const jobTitles: string[] = [
     "DevOpsEngineer",
     "FrontEndDeveloper",

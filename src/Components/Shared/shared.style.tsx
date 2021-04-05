@@ -8,6 +8,13 @@ export const PageTitle = styled.h1`
     text-align: center;
 `
 
+export const UnderTitle = styled.h2`
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding-top: 10px;
+`
+
 export const Description = styled.p`
     font-size: 16px;
     color: white;

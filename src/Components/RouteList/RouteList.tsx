@@ -4,7 +4,7 @@ import { Technologies } from "../Pages/About/Technologies";
 import { JobTitleHome } from "../Pages/JobTitles/JobTitleHome";
 import { JobTitle } from "../Pages/JobTitles/JobTitle";
 import { Keywords } from "../Pages/Keywords/Keywords";
-import { History } from "../Pages/History/History";
+import { Trends } from "../Pages/History/Trends";
 import { Scraping } from "../Pages/About/Scraping";
 import { Home } from "../Pages/Home/Home";
 import { HistoryChart } from "../Pages/History/HistoryChart";
@@ -28,8 +28,8 @@ export const RouteList: React.FC<Props> = ({
             <Route path="/history/chart">
                 <HistoryChart />
             </Route>
-            <Route path="/history">
-                <History allSkillsHistory={allSkillsHistory} />
+            <Route path="/history/trends">
+                <Trends allSkillsHistory={allSkillsHistory} />
             </Route>
             {/* <Route path="/trending">
                 <Trending allSkillsHistory={allSkillsHistory} />

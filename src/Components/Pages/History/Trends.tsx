@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components"
 import { DatedResult } from "../../../App";
-import { PageTitle, Transparent } from "../../Shared/shared.style";
+import { PageTitle, Transparent, UnderTitle } from "../../Shared/shared.style";
 
 interface Props {
     allSkillsHistory: [DatedResult];
 }
 
-export const History: React.FC<Props> = () => {
+export const Trends: React.FC<Props> = () => {
     //const [topTenSkillsHistory, setTopTenSkillsHistory] = useState<[DatedResult]>([{ date: "", keywords: [{ skillName: "", searchResultSum: "" }] }])
 
     // useEffect(() => {
@@ -39,7 +39,8 @@ export const History: React.FC<Props> = () => {
     return (
         <Wrapper>
             <Transparent>
-                <PageTitle>History</PageTitle>
+                <PageTitle>Trends</PageTitle>
+                <UnderTitle>Coming soon!</UnderTitle>
                 <HistoryWrapper>
                     {/* {
                         topTenSkillsHistory.map(array => {

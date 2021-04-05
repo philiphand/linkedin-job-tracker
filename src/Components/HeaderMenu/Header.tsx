@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 export const Header: React.FC = () => {
     return (
         <Wrapper>
-            <InfoText>Norwegian data only</InfoText>
+            <InfoText>Top skills in Norway</InfoText>
             <Flag src={NorwegianFlag} />
             <MenuButton>
                 <MenuOption name="History" url="/history/chart" />
-                <MenuOption name="Chart" url="/history/chart" />
+                <MenuOption name="Line chart" url="/history/chart" />
                 <MenuOption name="Trends" url="/history/trends" />
             </MenuButton>
             <MenuButton>
@@ -23,13 +23,12 @@ export const Header: React.FC = () => {
                 <MenuOption name="Job titles" url="/jobtitles/home" />
                 {/* TODO: Iterate through jobtitles instead of hardcoding */}
                 <MenuOption name="Full Stack Developer" url="/jobtitles/FullStackDeveloper" />
-                <MenuOption name="Back End Developer" url="/jobtitles/BackEndDeveloper" />
-                <MenuOption name="Front End Developer" url="/jobtitles/FrontEndDeveloper" />
                 <MenuOption name="DevOps Engineer" url="/jobtitles/DevOpsEngineer" />
                 <MenuOption name="Data Scientist" url="/jobtitles/DataScientist" />
+                <MenuOption name="All job titles" url="/jobtitles/home" />
             </MenuButton>
             <MenuButton>
-                <MenuOption name="Categories" url="/skills/weekly/languages" />
+                <MenuOption name="Skill categories" url="/skills/weekly/languages" />
                 <MenuOption name="Programming languages" url="/skills/weekly/languages" />
                 <MenuOption name="Frameworks and libraries" url="/skills/weekly/frameworks" />
                 <MenuOption name="Software" url="/skills/weekly/software" />
@@ -89,10 +88,10 @@ const InfoText = styled.p`
     color: white;
     position: absolute;
     font-weight: bold;
-    width: 70px;
+    width: 80px;
     left: 90px;
-    margin: 15px;
-    font-size: 14px;
+    margin: 12px;
+    font-size: 16px;
 
     @media only screen and (max-width: 1150px) {
 		opacity: 0;

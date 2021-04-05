@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components"
 import { DatedResult, Skill } from "../../../App";
 import { api_url } from "../../../Scripts/api";

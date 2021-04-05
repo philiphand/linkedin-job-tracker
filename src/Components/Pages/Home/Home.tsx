@@ -9,10 +9,9 @@ export const Home: React.FC = () => {
         <Wrapper>
             <Transparent>
                 <PageTitle>Welcome</PageTitle>
-                <UnderTitle>This page provides an overview of Norway's most in-demand tech skills</UnderTitle>
-                <InfoText>It was created to get a better understanding of the software and information technology job market.</InfoText>
-                <InfoText>It is especially useful for programmers wondering what technologies to learn next.</InfoText>
-                <InfoText>All data is scraped from the <InvisibleLink href="https://www.linkedin.com/jobs/" target="_blank" rel="noreferrer">LinkedIn job board</InvisibleLink>, and the website is updated daily.</InfoText>
+                <UnderTitle>This website provides an overview of Norway's most in-demand tech skills</UnderTitle>
+                <InfoText>A useful tool for programmers wondering what technologies to learn next.</InfoText>
+                <InfoText>All data is updated daily with data scraped from the <Link href="https://www.linkedin.com/jobs/" target="_blank" rel="noreferrer">LinkedIn job board</Link>.</InfoText>
                 <br />
                 <InfoText><b>More features are currently in development</b></InfoText>
             </Transparent>
@@ -32,8 +31,8 @@ const UnderTitle = styled.h2`
     color: white;
 `
 
-const InvisibleLink = styled.a`
-    text-decoration: none;
+const Link = styled.a`
+    text-decoration: underline;
     color: white;
 
     &:hover {

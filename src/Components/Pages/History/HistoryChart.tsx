@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { AllChartData } from "../../../App";
-import { PageTitle, Transparent } from "../../Shared/shared.style";
+import { InfoText, PageTitle, Transparent } from "../../Shared/shared.style";
 import { Chart } from 'react-charts'
 import { api_url } from "../../../Scripts/api";
 
@@ -53,7 +53,9 @@ export const HistoryChart: React.FC = () => {
     return (
         <Wrapper>
             <Transparent>
-                <PageTitle>Chart</PageTitle>
+                <PageTitle>History of keyword searches</PageTitle>
+                <InfoText>Hover mouse over chart for information</InfoText>
+                <InfoText>Earliest data is from March 24, the chart will be more useful over time.</InfoText>
                 <HistoryWrapper>
                     <div
                         style={{
