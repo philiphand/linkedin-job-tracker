@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components"
 import { api_url } from "../../../Scripts/api";
-import { separateUppercases } from "../../../Scripts/jobTitleHelper";
-import { Description, SkillText, Transparent } from "../../Shared/shared.style";
+import { jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
+import { Description, SkillText, Transparent, TransparentMenu } from "../../Shared/shared.style";
+import { JobTitleMenu } from "./JobTitleMenu";
 
 interface KeywordGroupDate {
     date: string;
@@ -28,6 +29,7 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
     let { jobTitle }: any = useParams();
 
     useEffect(() => {
+
         let separatedKeywords: string[] = []
         let listingsCounter = 0
 
@@ -61,8 +63,10 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
         })
     }, [jobTitle])
 
+
     return (
         <Wrapper>
+            <JobTitleMenu jobTitle={jobTitle} />
             <Transparent>
                 <SkillTableWrapper>
                     <Title>{separateUppercases(jobTitle)}</Title>
@@ -70,7 +74,7 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
                     {
                         skillCounts.map(skill => {
                             const index = skillCounts.indexOf(skill)
-                            if (index < 26) {
+                            if (index < 22) {
                                 return (
                                     <SkillWrapper key={skillCounts.indexOf(skill)}>
                                         <SkillText>{skill.skillName}</SkillText>
@@ -123,4 +127,9 @@ const SkillTableWrapper = styled.div`
     justify-content: center;
     max-width: 800px;
     padding-bottom: 20px;
+`
+
+const StyledLink = styled(Link)`
+    cursor: "default";
+    text-decoration: none;
 `

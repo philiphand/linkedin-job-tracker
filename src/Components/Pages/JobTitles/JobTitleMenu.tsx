@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components"
-import { Description, PageTitle, Transparent, UnderTitle } from "../../Shared/shared.style";
-import { jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
+import { TransparentMenu } from "../../Shared/shared.style";
+import { getJobTitleCategory, jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
 import { Link } from "react-router-dom";
 
 let softwareDevelopers: string[] = []
@@ -12,38 +12,26 @@ for (let i = 0; i < jobTitles.length; i++) {
     if (i >= 4) otherTitles.push(jobTitles[i])
 }
 
-export const JobTitleHome: React.FC = () => {
+interface Props {
+    jobTitle: string;
+}
+
+export const JobTitleMenu: React.FC<Props> = ({jobTitle}) => {
+    const jobTitles = getJobTitleCategory(jobTitle)
 
     return (
         <Wrapper>
-            <Transparent>
-                <PageTitle>All job titles</PageTitle>
-                <Description>Select a job title to see related skills</Description>
-                <UnderTitle>Software developers</UnderTitle>
-                <JobTitlesWrapper>
+            <TransparentMenu>
                     {
-                        softwareDevelopers.map((title) => {
+                        jobTitles.map((title) => {
                             return (
-                                <StyledLink key={softwareDevelopers.indexOf(title)} to={"/jobtitles/" + title}>
+                                <StyledLink key={jobTitles.indexOf(title)} to={"/jobtitles/" + title}>
                                     <JobTitle>{separateUppercases(title)}</JobTitle>
                                 </StyledLink>
                             )
                         })
                     }
-                </JobTitlesWrapper>
-                <UnderTitle>Other job titles</UnderTitle>
-                <JobTitlesWrapper>
-                    {
-                        otherTitles.map((title) => {
-                            return (
-                                <StyledLink key={otherTitles.indexOf(title)} to={"/jobtitles/" + title}>
-                                    <JobTitle>{separateUppercases(title)}</JobTitle>
-                                </StyledLink>
-                            )
-                        })
-                    }
-                </JobTitlesWrapper>
-            </Transparent>
+            </TransparentMenu>
         </Wrapper>
     );
 }

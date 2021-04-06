@@ -1,14 +1,14 @@
 
-export function checkIfJobTitle(title: string) {
-    if (title === "devops" || title === "DevOpsEngineer") return "devops"
-    if (title === "frontend" || title === "FrontEndDeveloper") return "frontend"
-    if (title === "backend" || title === "BackEndDeveloper") return "backend"
-    if (title === "fullstack" || title === "FullStackDeveloper") return "fullstack"
-    if (title === "scientist" || title === "DataScientist") return "scientist"
-    if (title === "analyst" || title === "DataAnalyst") return "analyst"
-    if (title === "machine" || title === "MachineLearningEngineer") return "machine"
-    if (title === "architect" || title === "CloudArchitect") return "architect"
-    return ""
+export function getJobTitleCategory(title: string) {
+    if (title === "devops" || title === "DevOpsEngineer") return developers
+    if (title === "frontend" || title === "FrontEndDeveloper") return developers
+    if (title === "backend" || title === "BackEndDeveloper") return developers
+    if (title === "fullstack" || title === "FullStackDeveloper") return developers
+    if (title === "scientist" || title === "DataScientist") return otherJobTitles
+    if (title === "analyst" || title === "DataAnalyst") return otherJobTitles
+    if (title === "machine" || title === "MachineLearningEngineer") return otherJobTitles
+    if (title === "architect" || title === "CloudArchitect") return otherJobTitles
+    return [""]
 }
 
 export interface SkillCount {
@@ -39,7 +39,6 @@ export function separateUppercases(title: string) {
     return separatedTitle
 }
 
-
 export const jobTitles: string[] = [
     "DevOpsEngineer",
     "FrontEndDeveloper",
@@ -51,11 +50,16 @@ export const jobTitles: string[] = [
     "CloudArchitect"
 ]
 
+export const developers: string[] = [
+    "DevOpsEngineer",
+    "FrontEndDeveloper",
+    "BackEndDeveloper",
+    "FullStackDeveloper"
+]
 
-export enum TitleShortHands {
-    devops = "DevOpsEngineer",
-    frontend = "FrontEndDeveloper",
-    backend = "BackEndDeveloper",
-    fullstack = "FullStackDeveloper",
-    scientist = "DataScientist"
-}
+export const otherJobTitles: string[] = [
+    "DataScientist",
+    "DataAnalyst",
+    "MachineLearningEngineer",
+    "CloudArchitect"
+]

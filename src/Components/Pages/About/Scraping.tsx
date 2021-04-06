@@ -14,7 +14,7 @@ export const Scraping: React.FC = () => {
                     1. Searching for a keyword and scraping the amount of search results<br />
                     2. Searching for a job title and going through all job postings individually and scraping all keywords found<br /><br />
 
-                    Please keep in mind that the accuracy of the collected data has a certain margin of error, . <br />
+                    Please keep in mind that the accuracy of the collected data has a certain margin of error. <br />
                     There are many reasons for this, e.g. duplicate job listings, multiple spellings of keywords, small sample sizes and of course inaccuracy in LinkedIn's own search engine.<br />
                     As more time passes, the sample size will grow and increase the accuracy of the data displayed.<br />
                     At the moment there is support for over 30 different spellings, along with some other small adjustments to increase the accuracy.<br />
