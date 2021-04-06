@@ -125,7 +125,7 @@ const SkillTableWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 800px;
+    width: 800px;
     padding-bottom: 20px;
 `
 

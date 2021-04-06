@@ -19,7 +19,6 @@ export const JobTitleHome: React.FC = () => {
             <Transparent>
                 <PageTitle>All job titles</PageTitle>
                 <Description>Select a job title to see related skills</Description>
-                <UnderTitle>Software developers</UnderTitle>
                 <JobTitlesWrapper>
                     {
                         softwareDevelopers.map((title) => {
@@ -31,7 +30,6 @@ export const JobTitleHome: React.FC = () => {
                         })
                     }
                 </JobTitlesWrapper>
-                <UnderTitle>Other job titles</UnderTitle>
                 <JobTitlesWrapper>
                     {
                         otherTitles.map((title) => {
@@ -69,6 +67,7 @@ const JobTitlesWrapper = styled.div`
     border: 1px solid silver;
     border-radius: 15px;
     margin: 10px;
+    width: 900px;
 `
 
 const JobTitle = styled.h3`

@@ -52,14 +52,14 @@ export const Transparent = styled.div`
 export const TransparentMenu = styled.div`
     background-color: rgba(0, 0, 0, 0.8);
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: space-evenly;
     border: 1px solid silver;
     border-radius: 15px;
     padding-left: 40px;
     padding-right: 40px;
     margin-right: 20px;
     margin-left: 20px;
+    width: 900px;
 `
 
 export const NavButtonsWrapper = styled.div`
