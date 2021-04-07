@@ -49,16 +49,6 @@ const StyledLink = styled(Link)`
     text-decoration: none;
 `
 
-const JobTitlesWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    border: 1px solid silver;
-    border-radius: 15px;
-    margin: 10px;
-`
-
 const JobTitle = styled.h3`
     color: white;
     padding: 15px;

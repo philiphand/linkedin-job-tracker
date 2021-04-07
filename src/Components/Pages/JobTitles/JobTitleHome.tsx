@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components"
-import { Description, PageTitle, Transparent, UnderTitle } from "../../Shared/shared.style";
+import { Description, PageTitle, Transparent } from "../../Shared/shared.style";
 import { jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
 import { Link } from "react-router-dom";
 
 let softwareDevelopers: string[] = []
 let otherTitles: string[] = []
 
+// Split job titles into two menus
 for (let i = 0; i < jobTitles.length; i++) {
     if (i < 4) softwareDevelopers.push(jobTitles[i])
     if (i >= 4) otherTitles.push(jobTitles[i])
@@ -18,7 +19,7 @@ export const JobTitleHome: React.FC = () => {
         <Wrapper>
             <Transparent>
                 <PageTitle>All job titles</PageTitle>
-                <Description>Select a job title to see related skills</Description>
+                <Description>Select a job title to see related skills that are frequently found in job postings</Description>
                 <JobTitlesWrapper>
                     {
                         softwareDevelopers.map((title) => {

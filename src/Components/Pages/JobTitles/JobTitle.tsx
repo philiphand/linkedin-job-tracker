@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components"
 import { api_url } from "../../../Scripts/api";
-import { jobTitles, separateUppercases } from "../../../Scripts/jobTitleHelper";
-import { Description, SkillText, Transparent, TransparentMenu } from "../../Shared/shared.style";
+import { separateUppercases } from "../../../Scripts/jobTitleHelper";
+import { Description, SkillText, Transparent } from "../../Shared/shared.style";
 import { JobTitleMenu } from "./JobTitleMenu";
 
 interface KeywordGroupDate {
@@ -22,9 +22,8 @@ interface SkillCount {
 // Dynamic component for any job title
 // jobTitleSkillGroup contains the history of all skillGroups for the specific job title
 
-export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route names for react-router (for use in RouteList)
+export const JobTitle: React.FC = () => { 
     const [numberOfListings, setNumberOfListings] = useState<number>(0) // Used for calculating percentages
-    //const [separatedKeywords, setSeparatedKeywords] = useState<string[]>([]) // Used for counting sum of each keyword
     const [skillCounts, setSkillCounts] = useState<SkillCount[]>([])
     let { jobTitle }: any = useParams();
 
@@ -46,7 +45,9 @@ export const JobTitle: React.FC = () => {  // TODO: Check out dynamic route name
                         listingsCounter += 1
                     });
                 })
-                let counts: any = {} // This function counts all occurences of each keyword and adds them together
+
+                // This function counts all occurences of each keyword and adds them together
+                let counts: any = {}
                 separatedKeywords.forEach(function (x) { counts[x.toString()] = (counts[x.toString()] || 0) + 1; })
 
                 // Re-formats keyword object
@@ -127,9 +128,4 @@ const SkillTableWrapper = styled.div`
     justify-content: center;
     width: 800px;
     padding-bottom: 20px;
-`
-
-const StyledLink = styled(Link)`
-    cursor: "default";
-    text-decoration: none;
 `
